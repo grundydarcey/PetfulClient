@@ -1,0 +1,19 @@
+.nav {
+  display: flex;
+  text-align: center;
+  background-color: #9bc0c5;
+  padding: 15px;
+
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+
+}
+
+a {
+  text-decoration: none;
+}
