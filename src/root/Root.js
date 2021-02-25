@@ -1,11 +1,8 @@
 import React from 'react';
 import Paperwork from '../Images/paperwork.jpg';
-import { Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Navigation from '../Navigation/navigation';
-import Cats from '../Cats/cats';
 import './root.css';
-import App from '../App/app';
-import AdoptionProcess from '../AdoptionProcess/adoptionprocess';
 
 function Root() {
   return <div>
