@@ -6,7 +6,6 @@ import './root.css';
 
 function Root() {
   return <div>
-   
     <Navigation />
     <h2>Are you considering pet adoption? It's a big responsibility with so many purrks. Here at the Petful animal shelter, we take the health and safety of our animals very safely.</h2>
     <h2>If you would like to move forward with the adoption process you can begin the 'Start Adoption' form below and see what it takes to become our lucky, newest pet owner.</h2>
