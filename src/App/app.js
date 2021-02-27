@@ -5,6 +5,7 @@ import Root from '../root/Root';
 import Dogs from '../Dogs/dogs';
 import Pets from '../Pets/pets';
 import AdoptionProcess from '../AdoptionProcess/adoptionprocess';
+import config from '../config';
 
 export default function App() {
   return (
