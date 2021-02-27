@@ -1,5 +1,5 @@
 import React from 'react';
-import config from '../config';
+//import config from '../config';
 import Navigation from '../Navigation/navigation';
 
 export default class Cats extends React.Component {
