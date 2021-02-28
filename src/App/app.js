@@ -5,7 +5,8 @@ import Root from '../root/Root';
 import Dogs from '../Dogs/dogs';
 import Pets from '../Pets/pets';
 import AdoptionProcess from '../AdoptionProcess/adoptionprocess';
-//import config from '../config';
+import config from '../config';
+import ApiContext from '../ApiContext';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -18,6 +19,26 @@ export default class App extends React.Component {
     }
   }
   
+  static contextType = ApiContext;
+
+  componentDidMount = () => {
+    Promise.all([
+      fetch(`${config.API_ENDPOINT}/cats`, {
+        method: 'GET',
+      })
+    ])
+    .then(([catsRes]) => {
+      if (!catsRes.ok) return catsRes.json().then((e) => Promise.reject(e));
+      return Promise.all([catsRes.json()]);
+    })
+    .then(([cats]) => {
+      this.setState({ cats });
+    })
+    .catch((error) => {
+      console.error({ error })
+    })
+  }
+
   render() {
 
     return (
