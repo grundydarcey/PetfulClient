@@ -25,6 +25,9 @@ export default class App extends React.Component {
     Promise.all([
       fetch(`${config.API_ENDPOINT}/cats`, {
         method: 'GET',
+        header: {
+          'Access-Control-Allow-Origin': 'http://localhost:3000'
+        }
       })
     ])
     .then(([catsRes]) => {
@@ -40,15 +43,20 @@ export default class App extends React.Component {
   }
 
   render() {
+    const value = {
+      cats: this.state.cats,
+    }
 
     return (
-      <div className='route'>
-        <Route exact path='/' component={Root} />
-        <Route exact path='/cats' component={Cats} />
-        <Route exact path='/dogs' component={Dogs} />
-        <Route exact path='/pets' component={Pets} />
-        <Route exact path='/adoptionprocess' component={AdoptionProcess} />
-      </div>
+      <ApiContext.Provider value={value}>
+       <div className='route'>
+          <Route exact path='/' component={Root} />
+          <Route exact path='/cats' component={Cats} />
+          <Route exact path='/dogs' component={Dogs} />
+          <Route exact path='/pets' component={Pets} />
+          <Route exact path='/adoptionprocess' component={AdoptionProcess} />
+        </div>
+      </ApiContext.Provider>
     )
   }
 }

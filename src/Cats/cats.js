@@ -8,7 +8,10 @@ export default class Cats extends React.Component {
   
   render() {
     const allCats = this.context.cats;
-    console.log(allCats)
+    const jsonString = JSON.stringify(allCats)
+    //const catString = allCats.toString();
+    //const parseCat = JSON.parse(catString);
+    console.log(jsonString)
   
     return (
       <div className='cats'>
@@ -17,11 +20,7 @@ export default class Cats extends React.Component {
         <p>Here are all our cats!</p>
         <ul>
           <li>Cats are here</li>
-          {allCats.map(cat =>
-            <li key={cat.id} className='cats'>
-              Name: {cat.name}<br />
-              Age: {cat.age}
-            </li>)}
+          {jsonString}
         </ul>
 
       </div>
