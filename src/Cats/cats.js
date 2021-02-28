@@ -9,9 +9,20 @@ export default class Cats extends React.Component {
   render() {
     const allCats = this.context.cats;
     const jsonString = JSON.stringify(allCats)
-    //const catString = allCats.toString();
-    //const parseCat = JSON.parse(catString);
-    console.log(jsonString)
+    console.log(allCats)
+    //const parsed = JSON.parse(allCats)
+    const stringed = JSON.stringify(allCats)
+
+    console.log(stringed['breed'])
+    const cats = Object.entries(allCats);
+    console.log(cats)
+    const theArray = []
+    theArray.push(cats)
+    console.log(theArray)
+    const result = Object.keys(allCats).map(e=>allCats[e]);
+
+    console.log(result)
+
   
     return (
       <div className='cats'>
@@ -19,10 +30,12 @@ export default class Cats extends React.Component {
         <h1>Meow</h1>
         <p>Here are all our cats!</p>
         <ul>
-          <li>Cats are here</li>
+          <li>Next cat to Adopt<br />
           {jsonString}
+          {stringed}
+          
+        </li>        
         </ul>
-
       </div>
     )
   }
