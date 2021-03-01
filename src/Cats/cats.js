@@ -6,6 +6,7 @@ export default class Cats extends React.Component {
   static contextType = ApiContext;
   render() {
     const firstCat = this.context.cats;
+    console.log(firstCat)
     return (
       <div className='cats'>
         <Navigation />
