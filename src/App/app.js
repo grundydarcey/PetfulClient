@@ -23,19 +23,20 @@ export default class App extends React.Component {
 
   componentDidMount = () => {
     Promise.all([
-      fetch(`${config.API_ENDPOINT}/cats`, {
+      fetch(`${config.API_ENDPOINT}/cats`),
+      fetch(`${config.API_ENDPOINT}/dogs`), {
         method: 'GET',
         header: {
           'Access-Control-Allow-Origin': 'http://localhost:3000'
         }
-      })
+      }
     ])
-    .then(([catsRes]) => {
-      if (!catsRes.ok) return catsRes.json().then((e) => Promise.reject(e));
-      return Promise.all([catsRes.json()]);
+    .then(([catsRes, dogsRes]) => {
+      if (!catsRes.ok && !dogsRes.ok) return catsRes.json().then((e) => Promise.reject(e)), dogsRes.json().then((e) => Promise.reject(e));
+      return Promise.all([catsRes.json(), dogsRes.json()]);
     })
-    .then(([cats]) => {
-      this.setState({ cats });
+    .then(([cats, dogs]) => {
+      this.setState({ cats, dogs });
     })
     .catch((error) => {
       console.error({ error })
@@ -45,6 +46,7 @@ export default class App extends React.Component {
   render() {
     const value = {
       cats: this.state.cats,
+      dogs: this.state.dogs,
     }
 
     return (
