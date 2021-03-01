@@ -32,7 +32,7 @@ export default class App extends React.Component {
       }
     ])
     .then(([catsRes, dogsRes]) => {
-      if (!catsRes.ok && !dogsRes.ok) return catsRes.json().then((e) => Promise.reject(e)), dogsRes.json().then((e) => Promise.reject(e));
+      if (!catsRes.ok && !dogsRes.ok) return catsRes.json().then((e) => Promise.reject(e)) && dogsRes.json().then((e) => Promise.reject(e));
       return Promise.all([catsRes.json(), dogsRes.json()]);
     })
     .then(([cats, dogs]) => {

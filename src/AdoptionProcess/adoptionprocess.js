@@ -6,7 +6,6 @@ export default function AdoptionProcess() {
     <div className='adoption'>
       <Navigation />
       <h2>Adoption Requirements</h2>
-
       <form>
         <fieldset>
           <legend>New Adoptive Owner Information</legend>
@@ -15,6 +14,8 @@ export default function AdoptionProcess() {
           <input type='text' id='name'></input>
         </fieldset>
       </form>
+      <h3>View Others Interested In Adoption</h3>
+      <p>We have a system of adopting to the interested parties on a first-come-first-serve basis. The people in this list below will be the next to get a pet.</p>
     </div>
   )
 }
