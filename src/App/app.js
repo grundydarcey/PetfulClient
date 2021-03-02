@@ -16,7 +16,6 @@ export default class App extends React.Component {
       dogs: [],
       pets: [],
       people: [],
-      addAdopt: () => {},
     }
   }
   
@@ -45,9 +44,9 @@ export default class App extends React.Component {
     })
   }
 
-  addAdopt = (newAdopt) => {
+  addAdopt(newAdopt) {
     const addAdopt = [...this.state.people, newAdopt];
-    this.setState({ people: addAdopt})
+    this.setState({ people : addAdopt })
   }
 
   render() {
@@ -56,7 +55,7 @@ export default class App extends React.Component {
       dogs: this.state.dogs,
       pets: this.state.pets,
       people: this.state.people,
-      addAdopt: this.state.addAdopt,
+      addAdopt: this.addAdopt,
     }
 
     return (

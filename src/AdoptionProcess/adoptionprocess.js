@@ -4,6 +4,15 @@ import ApiContext from '../ApiContext';
 import config from '../config';
 
 export default class AdoptionProcess extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      people: [],
+      submitted: false,
+    }
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+  
   static defaultProps = {
     history: {
       push: () => { }
@@ -18,9 +27,11 @@ export default class AdoptionProcess extends React.Component {
     const name = e.target.name.value;
     fetch(`${config.API_ENDPOINT}/people`, {
       method: 'POST',
-      body: JSON.stringify({
-        "value": name,
-      }),
+      headers: {
+        'Content-Type': 'plain/text',
+        
+      },
+      body: JSON.stringify(e.target.name.value),
     })
     .then(res => {
       if (!res.ok) {
@@ -29,13 +40,16 @@ export default class AdoptionProcess extends React.Component {
       return res.json();
     })
     .then((name) => {
-      this.context.addAdopt(name);
+      const addAdopt = [...this.state.people, name]
+      this.setState({ people: addAdopt})
     })
     .catch(error => {
       console.error({ error })
     })
     this.props.history.push('/adoptionprocess');
     console.log(name)
+    console.log(this.state.people, this.context.people)
+    this.setState({ submitted: true })
   }
 
 
@@ -47,11 +61,9 @@ export default class AdoptionProcess extends React.Component {
     const third = allPeople.first.next.next['value'];
     //const fourth =
     //const fifth = 
-    return (
-      <div className='adoption'>
-        <Navigation />
-        <h2>Adoption Requirements</h2>
-        <form onSubmit={(e) => this.handleSubmit(e)}>
+
+    const submission = (this.state.submitted === false) ? (
+      <form onSubmit={(e) => this.handleSubmit(e)}>
           <fieldset>
             <legend>New Adoptive Owner Information</legend>
             <p>Fill out this form to adopt a baby pet.</p>
@@ -60,6 +72,15 @@ export default class AdoptionProcess extends React.Component {
             <button type='submit' className='submit'>Submit Application to Get in Line</button>
           </fieldset>
         </form>
+    ) : (
+      <p>Thanks for submitting your name! You will be added to our list.</p>
+    )
+
+    return (
+      <div className='adoption'>
+        <Navigation />
+        <h2>Adoption Requirements</h2>
+          {submission}
         <h3>View Others Interested In Adoption</h3>
         <p>We have a system of adopting to the interested parties on a first-come-first-serve basis. The people in this list below will be the next to get a pet.</p><br />
         <p>Next in Line: {first} <br />
