@@ -2,7 +2,7 @@ import React from 'react';
 import ApiContext from '../ApiContext';
 import Navigation from '../Navigation/navigation';
 
-export default class Dos extends React.Component {   
+export default class Dogs extends React.Component {   
   static contextType = ApiContext;
   render() {
     const firstDog = this.context.dogs;

@@ -12,7 +12,7 @@ export default function Navigation() {
         <Link to='/cats'>View Cats</Link><br />
         <Link to='/dogs'>View Dogs</Link><br />
         <Link to='/pets'>View All Pets</Link>
-        <Link to='/adoptionprocess'>Begin Adoption Process</Link><br /> 
+        <Link to='/adoptionprocess'>Start Adoption Process</Link><br /> 
       </div>
     </div>
     </div>

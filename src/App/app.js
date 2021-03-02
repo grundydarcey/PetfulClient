@@ -7,6 +7,7 @@ import Pets from '../Pets/pets';
 import AdoptionProcess from '../AdoptionProcess/adoptionprocess';
 import config from '../config';
 import ApiContext from '../ApiContext';
+import ChoosePets from '../ChoosePets/choosePets';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -49,6 +50,8 @@ export default class App extends React.Component {
     this.setState({ people : addAdopt })
   }
 
+  
+
   render() {
     const value = {
       cats: this.state.cats,
@@ -66,6 +69,7 @@ export default class App extends React.Component {
           <Route exact path='/dogs' component={Dogs} />
           <Route exact path='/pets' component={Pets} />
           <Route exact path='/adoptionprocess' component={AdoptionProcess} />
+          <Route exact path='/choosepets' component={ChoosePets} />
         </div>
       </ApiContext.Provider>
     )
