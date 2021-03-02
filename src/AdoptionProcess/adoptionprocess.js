@@ -78,7 +78,7 @@ export default class AdoptionProcess extends React.Component {
 
 
   render() {
-    const allPeople = this.context.people;
+    //const allPeople = this.context.people;
     const firstCat = this.context.cats;
     const firstDog = this.context.dogs;
     console.log(firstCat, 'firstcat')

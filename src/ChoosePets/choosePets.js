@@ -1,8 +1,10 @@
 import React from 'react';
 import ApiContext from '../ApiContext';
 import Navigation from '../Navigation/navigation';
+import './choosePets.css';
 
 export default class choosePets extends React.Component {
+  static contextType = ApiContext;  
   render() {
     return (
       <div className='choosePets'>
