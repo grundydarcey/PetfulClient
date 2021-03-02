@@ -28,10 +28,11 @@ export default class AdoptionProcess extends React.Component {
     fetch(`${config.API_ENDPOINT}/people`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'plain/text',
-        
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(e.target.name.value),
+      body: JSON.stringify({
+         data: name
+      }),
     })
     .then(res => {
       if (!res.ok) {
@@ -40,15 +41,14 @@ export default class AdoptionProcess extends React.Component {
       return res.json();
     })
     .then((name) => {
-      const addAdopt = [...this.state.people, name]
-      this.setState({ people: addAdopt})
+      this.context.addAdopt(name)
     })
     .catch(error => {
       console.error({ error })
     })
     this.props.history.push('/adoptionprocess');
     console.log(name)
-    console.log(this.state.people, this.context.people)
+    //console.log(this.state.people, this.context.people)
     this.setState({ submitted: true })
   }
 

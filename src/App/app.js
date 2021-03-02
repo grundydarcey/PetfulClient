@@ -45,7 +45,7 @@ export default class App extends React.Component {
   }
 
   addAdopt(newAdopt) {
-    const addAdopt = [...this.state.people, newAdopt];
+    const addAdopt = {...this.state.people, newAdopt};
     this.setState({ people : addAdopt })
   }
 
