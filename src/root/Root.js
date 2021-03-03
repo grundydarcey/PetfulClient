@@ -3,7 +3,6 @@ import Paperwork from '../Images/paperwork.jpg';
 import { Link } from 'react-router-dom';
 import Navigation from '../Navigation/navigation';
 import './root.css';
-import ApiContext from '../ApiContext';
 
 function Root() {
   
