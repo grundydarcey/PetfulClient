@@ -24,12 +24,10 @@ export default class AdoptionProcess extends React.Component {
 
   static contextType = ApiContext;
 
-  componentDidMount() {
-    console.log(this.context.people)
-  }
-
   newAdoption() {
-    fetch(`${config.API_ENDPOINT}/people`, {
+    fetch(`${config.API_ENDPOINT}/people`,
+    fetch(`${config.API_ENDPOINT}/cats`,
+    fetch(`${config.API_ENDPOINT}/dogs`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
@@ -43,7 +41,7 @@ export default class AdoptionProcess extends React.Component {
     })
     .catch(error  => {
       console.error({ error })
-    })
+    })))
   }
 
   handleSubmit(e) {
@@ -78,18 +76,11 @@ export default class AdoptionProcess extends React.Component {
 
 
   render() {
-    //const allPeople = this.context.people;
     const firstCat = this.context.cats;
     const firstDog = this.context.dogs;
     console.log(firstCat, 'firstcat')
     console.log(firstDog, 'first dog');
   
-    /*const first = allPeople.first.value;
-    const second = allPeople.first.next['value'];
-    const third = allPeople.first.next.next['value'];
-    const fourth = allPeople.first.next.next.next['value'];
-    const fifth = allPeople.first.next.next.next.next['value'];*/
-
     const submission = (this.state.submitted === false) ? (
       <form onSubmit={(e) => this.handleSubmit(e)}>
           <fieldset>
@@ -105,13 +96,15 @@ export default class AdoptionProcess extends React.Component {
     )
 
     return (
-      <div className='adoption'>
-        <Navigation />
-        <h2>Adoption Requirements</h2>
-        {submission}
-        <AdoptionQueue />
-        <button type='button' onClick={() => this.newAdoption()}>Click to delete person</button>
-      </div>
+      
+        <div className='adoption'>
+          <Navigation />
+          <h2>Adoption Requirements</h2>
+          {submission}
+          <AdoptionQueue />
+          <button type='button' onClick={() => this.newAdoption()}>Click to delete person</button>
+        </div>
+      
     )
   }
 }
