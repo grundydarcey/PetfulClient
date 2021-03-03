@@ -96,15 +96,13 @@ export default class AdoptionProcess extends React.Component {
     )
 
     return (
-      
-        <div className='adoption'>
-          <Navigation />
-          <h2>Adoption Requirements</h2>
-          {submission}
-          <AdoptionQueue />
-          <button type='button' onClick={() => this.newAdoption()}>Click to delete person</button>
-        </div>
-      
+      <div className='adoption'>
+        <Navigation />
+        <h2>Adoption Requirements</h2>
+        {submission}
+        <AdoptionQueue />
+        <button type='button' onClick={() => this.newAdoption()}>Click to delete person</button>
+      </div>
     )
   }
 }
