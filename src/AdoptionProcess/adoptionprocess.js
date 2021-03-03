@@ -25,27 +25,29 @@ export default class AdoptionProcess extends React.Component {
   static contextType = ApiContext;
 
   newAdoption() {
-    
       //fetch(`${config.API_ENDPOINT}/cats`),
+    console.log('deleted')
       //fetch(`${config.API_ENDPOINT}/dogs`),
-      Promise.all([
+      //Promise.all([
+        //fetch(`${config.API_ENDPOINT}/cats`),
+        //fetch(`${config.API_ENDPOINT}/dogs`),
         fetch(`${config.API_ENDPOINT}/people`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
         },
       })
-    ])
-    .then(res => {
-      if (!res.ok) return res.json().then((e) => Promise.reject(e));
-      return Promise.all([res.json()]);
+    .then(([res]) => {
+      if (!res.ok) return res.json().then(() => Promise.reject());
+      return Promise([res.json()]);
     })
+  /*.then((res) =>{
+      
+      this.setState({ people: res.json() })
+    })*/
     .catch(error  => {
       console.error({ error })
     })
-    //console.log(this.context.people, 'people')
-    //console.log(this.context.cats, 'cats')
-    //console.log(this.context.dogs, )
   }
 
   handleSubmit(e) {
@@ -67,7 +69,6 @@ export default class AdoptionProcess extends React.Component {
       return res.json();
     })
     .then((name) => {
-      console.log(name)
       this.context.addAdopt(name)
     })
     .catch(error => {
