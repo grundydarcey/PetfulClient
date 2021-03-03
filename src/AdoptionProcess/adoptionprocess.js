@@ -43,9 +43,9 @@ export default class AdoptionProcess extends React.Component {
     .catch(error  => {
       console.error({ error })
     })
-    console.log(this.context.people, 'people')
-    console.log(this.context.cats, 'cats')
-    console.log(this.context.dogs, )
+    //console.log(this.context.people, 'people')
+    //console.log(this.context.cats, 'cats')
+    //console.log(this.context.dogs, )
   }
 
   handleSubmit(e) {
@@ -67,6 +67,7 @@ export default class AdoptionProcess extends React.Component {
       return res.json();
     })
     .then((name) => {
+      console.log(name)
       this.context.addAdopt(name)
     })
     .catch(error => {
@@ -80,8 +81,8 @@ export default class AdoptionProcess extends React.Component {
   render() {
     const firstCat = this.context.cats;
     const firstDog = this.context.dogs;
-    console.log(firstCat, 'firstcat')
-    console.log(firstDog, 'first dog');
+    //console.log(firstCat, 'firstcat')
+    //console.log(firstDog, 'first dog');
   
     const submission = (this.state.submitted === false) ? (
       <form onSubmit={(e) => this.handleSubmit(e)}>

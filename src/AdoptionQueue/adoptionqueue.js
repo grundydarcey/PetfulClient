@@ -9,11 +9,11 @@ export default function AdoptionQueue() {
     let current = allThesePeople.first;
     let arr = [];
     while (current) {
-      console.log(current.value);
+      //console.log(current.value);
       arr.push(current.value)
       current = current.next;
     }
-    console.log(arr)
+    //console.log(arr)
     const spacedArr = arr.join(', ');
     return spacedArr;
   }
