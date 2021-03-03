@@ -79,11 +79,6 @@ export default class AdoptionProcess extends React.Component {
 
 
   render() {
-    const firstCat = this.context.cats;
-    const firstDog = this.context.dogs;
-    //console.log(firstCat, 'firstcat')
-    //console.log(firstDog, 'first dog');
-  
     const submission = (this.state.submitted === false) ? (
       <form onSubmit={(e) => this.handleSubmit(e)}>
           <fieldset>
