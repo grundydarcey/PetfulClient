@@ -1,19 +1,10 @@
 import React, { useContext } from 'react';
 import ApiContext from '../ApiContext';
-import { v4 as uuidv4 } from 'uuid';
-
-//const value = useContext(ApiContext)
 
 export default function AdoptionQueue() {
-  //static contextType = ApiContext;
   const value = useContext(ApiContext);
   const allThesePeople = value.people;
   
-  /*const generatePeople = () => {
-    return allThesePeople.map((person, idx) => {
-      return <p key={uuidv4()}>Person {idx+1} - {person}</p>}
-    )}*/
-
   const generateAllPeople = () => {
     let current = allThesePeople.first;
     let arr = [];
@@ -26,7 +17,6 @@ export default function AdoptionQueue() {
     const spacedArr = arr.join(', ');
     return spacedArr;
   }
-
 
   return (
     <div className='queue'>
