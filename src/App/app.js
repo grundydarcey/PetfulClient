@@ -17,6 +17,7 @@ export default class App extends React.Component {
       dogs: [],
       pets: [],
       people: [],
+      newAdopterReady: false,
     }
   }
   
@@ -50,8 +51,6 @@ export default class App extends React.Component {
     this.setState({ people : addAdopt })
   }
 
-  
-
   render() {
     const value = {
       cats: this.state.cats,
@@ -59,6 +58,7 @@ export default class App extends React.Component {
       pets: this.state.pets,
       people: this.state.people,
       addAdopt: this.addAdopt,
+      newAdopterReady: this.state.newAdopterReady,
     }
 
     return (

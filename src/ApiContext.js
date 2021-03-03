@@ -5,7 +5,7 @@ const ApiContext = React.createContext({
   dogs: [],
   pets: [],
   people: [],
-
+  newAdopterReady: false,
 })
 
 export default ApiContext;

@@ -4,7 +4,7 @@ import ApiContext from '../ApiContext';
 export default function AdoptionQueue() {
   const value = useContext(ApiContext);
   const allThesePeople = value.people;
-  
+
   const generateAllPeople = () => {
     let current = allThesePeople.first;
     let arr = [];
