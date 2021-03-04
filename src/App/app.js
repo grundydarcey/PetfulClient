@@ -62,6 +62,11 @@ export default class App extends React.Component {
     this.setState({ newAdopterAdded: true })
   }
 
+  petGotAdopted = (newData) => {
+    this.setState({ allCats: newData })
+    this.setState({ allDogs: newData })
+  }
+
   render() {
     const value = {
       cats: this.state.cats,
@@ -74,6 +79,7 @@ export default class App extends React.Component {
       allCats: this.state.allCats,
       allDogs: this.state.allDogs,
       addAdopter: this.addAdopter,
+      petGotAdopted: this.petGotAdopted,
     }
 
     return (

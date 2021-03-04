@@ -2,6 +2,7 @@ import Navigation from '../Navigation/navigation';
 import React from 'react';
 import ApiContext from '../ApiContext';
 import config from '../config';
+import { Link } from 'react-router-dom';
 import AdoptionQueue from '../AdoptionQueue/adoptionqueue';
 
 export default class AdoptionProcess extends React.Component {
@@ -14,6 +15,7 @@ export default class AdoptionProcess extends React.Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.newAdoption = this.newAdoption.bind(this)
+    this.pickAndDeleteRandomPet = this.pickAndDeleteRandomPet.bind(this)
   }
   
   static defaultProps = {
@@ -24,6 +26,31 @@ export default class AdoptionProcess extends React.Component {
   }
 
   static contextType = ApiContext;
+
+  pickAndDeleteRandomPet() {
+    console.log('lets pick one')
+    let choices = ['allCats', 'allDogs'];
+    const choice = choices[Math.floor(Math.random() * choices.length)]
+    console.log(choice);
+    fetch(`${config.API_ENDPOINT}/${choice}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error('Something went wrong, please try again');
+      }
+      return res.json();
+    })
+    .then((data) => {
+      this.context.petGotAdopted(data);
+    })
+    .catch(error => {
+      console.error({ error })
+    })
+  }
 
   newAdoption() {
     fetch(`${config.API_ENDPOINT}/people`, {
@@ -38,12 +65,13 @@ export default class AdoptionProcess extends React.Component {
       }
       return res.json();
     })
-    .then((data) =>{
+    .then((data) => {
       this.context.gotAdopted(data);
     })
     .catch(error  => {
       console.error({ error })
     })
+    this.pickAndDeleteRandomPet();
   }
 
   handleSubmit(e) {
@@ -92,6 +120,20 @@ export default class AdoptionProcess extends React.Component {
     ) : (
       <p>Thanks for submitting your name! You will be added to our list.</p>
     )
+    const peopleRemaining = this.context.people;
+    console.log(peopleRemaining['first']['value']);
+    console.log(peopleRemaining['last']['value']);
+    let current = peopleRemaining.first;
+    current = current.next
+    const conditionalButton = (current.next === null
+      
+      
+      
+     /* peopleRemaining['first']['value'] === peopleRemaining['last']['value'] */) ? (
+      <Link to='/choosepets'>Select your Pet</Link>
+    ) : (
+      <button type='button' onClick={() => this.newAdoption()}>Click to delete person</button>
+    )
 
     return (
       <div className='adoption'>
@@ -99,7 +141,7 @@ export default class AdoptionProcess extends React.Component {
         <h2>Adoption Requirements</h2>
         {submission}
         <AdoptionQueue />
-        <button type='button' onClick={() => this.newAdoption()}>Click to delete person</button>
+        {conditionalButton}
       </div>
     )
   }
