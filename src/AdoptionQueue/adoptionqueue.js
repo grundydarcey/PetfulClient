@@ -12,11 +12,12 @@ export default function AdoptionQueue() {
       arr.push(current.value)
       current = current.next;
     }
-    //console.log(arr)
+    
     const spacedArr = arr.join(', ');
     return spacedArr;
   }
 
+  console.log(value.newAdopterAdded);
   const allCats = value.allCats;
 /*  const allDogs = value.allDogs;
 
@@ -43,19 +44,21 @@ export default function AdoptionQueue() {
   }
   */
   const generatePeopleWithPet = () => {
-    let current = allThesePeople.first + allCats.first.value['name'];
+    let current = allThesePeople.first
     let arr = [];
-    arr.push()
+    let currentAdoption = allThesePeople.first['value'] + ` is adopting ` + allCats.first['value']['name'];
+    arr.push(currentAdoption);
     while (current) {
+  
       arr.push(current.value)
       current = current.next;
+      
     }
-    //console.log(arr)
     const spacedArr = arr.join(', ');
     return spacedArr;
   }
 
-  const newAdopter = (value.newAdopterAdded === false) ? (
+  const newAdopter = (value.newAdopterAdded === false || value.submitted === false ) ? (
     <p>People already in line: {generateAllPeople()}</p>
   ) : (
     <p>

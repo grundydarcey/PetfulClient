@@ -10,7 +10,7 @@ export default class AdoptionProcess extends React.Component {
     this.state = {
       people: [],
       submitted: false,
-      newAdopterAdded: false,
+      //newAdopterAdded: false,
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.newAdoption = this.newAdoption.bind(this)
@@ -66,13 +66,15 @@ export default class AdoptionProcess extends React.Component {
     })
     .then((name) => {
       this.context.addAdopt(name)
+      this.context.addAdopter();
     })
     .catch(error => {
       console.error({ error })
     })
     this.props.history.push('/adoptionprocess');
     this.setState({ submitted: true })
-    this.setState({ newAdopterAdded: true })
+    //this.setState({ newAdopterAdded: true })
+    console.log(this.context.newAdopterAdded);
   }
 
 
