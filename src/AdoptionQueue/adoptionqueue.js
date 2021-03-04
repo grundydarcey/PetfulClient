@@ -9,7 +9,6 @@ export default function AdoptionQueue() {
     let current = allThesePeople.first;
     let arr = [];
     while (current) {
-      //console.log(current.value);
       arr.push(current.value)
       current = current.next;
     }
@@ -18,13 +17,59 @@ export default function AdoptionQueue() {
     return spacedArr;
   }
 
+  const allCats = value.allCats;
+/*  const allDogs = value.allDogs;
+
+  const generateAllCats = () => {
+    let current = allCats.first;
+    let arr = [];
+    while (current) {
+      arr.push(current.value['name'])
+      current = current.next
+    }
+    const spacedArr = arr.join(', ')
+    return spacedArr
+  }
+
+  const generateAllDogs = () => {
+    let current = allDogs.first;
+    let arr = [];
+    while (current) {
+      arr.push(current.value['name'])
+      current = current.next
+    }
+    const spacedArr = arr.join(', ')
+    return spacedArr
+  }
+  */
+  const generatePeopleWithPet = () => {
+    let current = allThesePeople.first + allCats.first.value['name'];
+    let arr = [];
+    arr.push()
+    while (current) {
+      arr.push(current.value)
+      current = current.next;
+    }
+    //console.log(arr)
+    const spacedArr = arr.join(', ');
+    return spacedArr;
+  }
+
+  const newAdopter = (value.newAdopterAdded === false) ? (
+    <p>People already in line: {generateAllPeople()}</p>
+  ) : (
+    <p>
+      Adoption Began People already in line: {generatePeopleWithPet()}
+    </p>
+  )
+
   return (
     <div className='queue'>
       <h3>View Others Interested In Adoption</h3>
       <p>We have a system of adopting to the interested parties on a first-come-first-serve basis. The people in this list below will be the next to get a pet.</p><br />
-      <p>
-        People already in line: {generateAllPeople()}
-      </p>
+      
+        {newAdopter}
+    
     </div>
     )
   }

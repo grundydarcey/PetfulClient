@@ -10,6 +10,7 @@ export default class AdoptionProcess extends React.Component {
     this.state = {
       people: [],
       submitted: false,
+      newAdopterAdded: false,
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.newAdoption = this.newAdoption.bind(this)
@@ -25,30 +26,20 @@ export default class AdoptionProcess extends React.Component {
   static contextType = ApiContext;
 
   newAdoption() {
-      //fetch(`${config.API_ENDPOINT}/cats`),
-    console.log('deleted')
-      //fetch(`${config.API_ENDPOINT}/dogs`),
-      //Promise.all([
-        //fetch(`${config.API_ENDPOINT}/cats`),
-        //fetch(`${config.API_ENDPOINT}/dogs`),
-        fetch(`${config.API_ENDPOINT}/people`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-      })
+    fetch(`${config.API_ENDPOINT}/people`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
     .then((res) => {
       if (!res.ok) {
         throw new Error('Something went wrong, please try again');
       }
       return res.json();
-      
-     /* return res.json().then(() => Promise.reject());
-      return Promise([res.json()]);*/
     })
     .then((data) =>{
       this.context.gotAdopted(data);
-      console.log(data)
     })
     .catch(error  => {
       console.error({ error })
@@ -81,6 +72,7 @@ export default class AdoptionProcess extends React.Component {
     })
     this.props.history.push('/adoptionprocess');
     this.setState({ submitted: true })
+    this.setState({ newAdopterAdded: true })
   }
 
 
