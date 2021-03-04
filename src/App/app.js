@@ -22,6 +22,7 @@ export default class App extends React.Component {
       allDogs: [],
       addedUser: [],
       artificialUsers: [],
+      addedArtificialUsers: false,
     }
   }
   
@@ -74,6 +75,9 @@ export default class App extends React.Component {
     //this.context.addedUser.push(newUser)
   }
 
+  addArtificials = () => {
+    this.setState({ addedArtificialUsers: true })
+  }
   
 
   render() {
@@ -92,6 +96,8 @@ export default class App extends React.Component {
       addedUser: this.state.addedUser,
       manuallyAddUser: this.manuallyAddUser,
       artificialUsers: this.state.artificialUsers,
+      addArtificials: this.addArtificials,
+      addedArtificialUsers: this.state.addedArtificialUsers,
     }
 
     return (
