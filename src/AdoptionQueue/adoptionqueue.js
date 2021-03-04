@@ -48,12 +48,21 @@ export default function AdoptionQueue() {
     let arr = [];
     let currentAdoption = allThesePeople.first['value'] + ` is adopting ` + allCats.first['value']['name'];
     arr.push(currentAdoption);
+    let nextCurrent = allThesePeople.first['next']['value']
+    console.log(nextCurrent);
+    current = current.next;
+    if (current !== allThesePeople.first) {
+      while (current) {
+        arr.push(current.value)
+        current = current.next;
+      }
+    }
+    /*
     while (current) {
-  
       arr.push(current.value)
       current = current.next;
-      
-    }
+     */
+  
     const spacedArr = arr.join(', ');
     return spacedArr;
   }
