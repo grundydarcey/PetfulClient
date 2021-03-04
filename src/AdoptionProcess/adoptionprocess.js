@@ -28,10 +28,10 @@ export default class AdoptionProcess extends React.Component {
   static contextType = ApiContext;
 
   pickAndDeleteRandomPet() {
-    console.log('lets pick one')
+    //console.log('lets pick one')
     let choices = ['allCats', 'allDogs'];
     const choice = choices[Math.floor(Math.random() * choices.length)]
-    console.log(choice);
+    //console.log(choice);
     fetch(`${config.API_ENDPOINT}/${choice}`, {
       method: 'DELETE',
       headers: {
@@ -95,6 +95,7 @@ export default class AdoptionProcess extends React.Component {
     .then((name) => {
       this.context.addAdopt(name)
       this.context.addAdopter();
+      
     })
     .catch(error => {
       console.error({ error })
@@ -102,11 +103,14 @@ export default class AdoptionProcess extends React.Component {
     this.props.history.push('/adoptionprocess');
     this.setState({ submitted: true })
     //this.setState({ newAdopterAdded: true })
-    console.log(this.context.newAdopterAdded);
+    //console.log(this.context.newAdopterAdded);
+    console.log(this.context.addedUser);
+    this.context.manuallyAddUser(name);
   }
 
 
   render() {
+    console.log(this.context.addedUser, 'addeduser')
     const submission = (this.state.submitted === false) ? (
       <form onSubmit={(e) => this.handleSubmit(e)}>
           <fieldset>
@@ -121,15 +125,12 @@ export default class AdoptionProcess extends React.Component {
       <p>Thanks for submitting your name! You will be added to our list.</p>
     )
     const peopleRemaining = this.context.people;
-    console.log(peopleRemaining['first']['value']);
-    console.log(peopleRemaining['last']['value']);
+    const recentlyAddedUser = this.context.addedUser;
+    //console.log(peopleRemaining['first']['value']);
+    //console.log(peopleRemaining['last']['value']);
     let current = peopleRemaining.first;
     current = current.next
-    const conditionalButton = (current.next === null
-      
-      
-      
-     /* peopleRemaining['first']['value'] === peopleRemaining['last']['value'] */) ? (
+    const conditionalButton = (current.value === recentlyAddedUser) ? (
       <Link to='/choosepets'>Select your Pet</Link>
     ) : (
       <button type='button' onClick={() => this.newAdoption()}>Click to delete person</button>

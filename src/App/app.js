@@ -20,6 +20,7 @@ export default class App extends React.Component {
       newAdopterAdded: false,
       allCats: [],
       allDogs: [],
+      addedUser: [],
     }
   }
   
@@ -67,6 +68,11 @@ export default class App extends React.Component {
     this.setState({ allDogs: newData })
   }
 
+  manuallyAddUser = (newUser) => {
+    this.setState({ addedUser: newUser })
+    //this.context.addedUser.push(newUser)
+  }
+
   render() {
     const value = {
       cats: this.state.cats,
@@ -80,6 +86,8 @@ export default class App extends React.Component {
       allDogs: this.state.allDogs,
       addAdopter: this.addAdopter,
       petGotAdopted: this.petGotAdopted,
+      addedUser: this.state.addedUser,
+      manuallyAddUser: this.manuallyAddUser,
     }
 
     return (
