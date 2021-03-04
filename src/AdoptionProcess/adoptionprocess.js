@@ -37,14 +37,19 @@ export default class AdoptionProcess extends React.Component {
           'Content-Type': 'application/json'
         },
       })
-    .then(([res]) => {
-      if (!res.ok) return res.json().then(() => Promise.reject());
-      return Promise([res.json()]);
-    })
-  /*.then((res) =>{
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error('Something went wrong, please try again');
+      }
+      return res.json();
       
-      this.setState({ people: res.json() })
-    })*/
+     /* return res.json().then(() => Promise.reject());
+      return Promise([res.json()]);*/
+    })
+    .then((data) =>{
+      this.context.gotAdopted(data);
+      console.log(data)
+    })
     .catch(error  => {
       console.error({ error })
     })

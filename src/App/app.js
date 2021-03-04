@@ -62,7 +62,7 @@ export default class App extends React.Component {
       people: this.state.people,
       addAdopt: this.addAdopt,
       newAdopterReady: this.state.newAdopterReady,
-      getAdopted: this.getAdopted,
+      gotAdopted: this.gotAdopted,
     }
 
     return (
