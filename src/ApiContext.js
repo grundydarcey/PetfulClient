@@ -9,6 +9,7 @@ const ApiContext = React.createContext({
   allCats: [],
   allDogs: [],
   addedUser: [],
+  artificialUsers: [],
 })
 
 export default ApiContext;

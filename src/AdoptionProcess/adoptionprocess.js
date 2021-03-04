@@ -83,7 +83,7 @@ export default class AdoptionProcess extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-         data: name
+        data: name
       }),
     })
     .then(res => {
@@ -110,7 +110,7 @@ export default class AdoptionProcess extends React.Component {
 
 
   render() {
-    console.log(this.context.addedUser, 'addeduser')
+    console.log(this.context.artificialUsers)
     const submission = (this.state.submitted === false) ? (
       <form onSubmit={(e) => this.handleSubmit(e)}>
           <fieldset>
