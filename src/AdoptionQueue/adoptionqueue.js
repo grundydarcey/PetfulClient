@@ -1,6 +1,5 @@
 import React from 'react';
 import ApiContext from '../ApiContext';
-import config from '../config';
 
 export default class AdoptionQueue extends React.Component {
   constructor(props) {
@@ -8,53 +7,12 @@ export default class AdoptionQueue extends React.Component {
     this.state = {
       addedArtificialUsers: false,
     }
-    this.seedArtificialUsers = this.seedArtificialUsers.bind(this);
   }
   
   static contextType = ApiContext;
 
-  seedArtificialUsers() {
-    const artificialUsers = ['Ed', 'Edd', 'Eddy', 'Naz', 'Rolf'];
-    while (this.context.addedArtificialUsers === false) {
-    artificialUsers.forEach((user) => {
-      fetch(`${config.API_ENDPOINT}/people`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          data: user
-        }),
-      })
-      .then(res => {
-        if (!res.ok) {
-          throw new Error('Something went wrong, try again');
-        }
-        return res.json();
-      })
-      .then((data) => {
-        this.context.addAdopt(data);
-        this.context.addAdopter();
-      })
-      .catch(error => {
-        console.error({ error })
-      })
-      this.context.addArtificials();
-    })  
-    }
-  }
-
-
   render() {
-  
   const allThesePeople = this.context.people;
-
-  //const artificialUsers = ['Ed', 'Edd', 'Eddy', 'Naz', 'Rolf'];
-
-  
-  
-  
-
   const generateAllPeople = () => {
     let current = allThesePeople.first;
     let arr = [];
@@ -65,16 +23,20 @@ export default class AdoptionQueue extends React.Component {
     const spacedArr = arr.join(', ');
     return spacedArr;
   }
-
   console.log(this.context.newAdopterAdded);
   const allCats = this.context.allCats;
-
 
   const generatePeopleWithPet = () => {
     let current = allThesePeople.first
     let arr = [];
-    let currentAdoption = allThesePeople.first['value'] + ` is adopting ` + allCats.first['value']['name'];
-    arr.push(currentAdoption);
+    if (allThesePeople.first['value'] === this.context.addedUser) {
+      let currentAdoption = allThesePeople.first['value'];
+      arr.push(currentAdoption)
+    } else {
+      let currentAdoption = allThesePeople.first['value'] + ` is adopting ` + allCats.first['value']['name'];
+      arr.push(currentAdoption)
+    }
+    //rr.push(currentAdoption);
     current = current.next;
     if (current !== allThesePeople.first) {
       while (current) {

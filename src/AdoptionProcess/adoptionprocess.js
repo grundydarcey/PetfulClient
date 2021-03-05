@@ -11,11 +11,11 @@ export default class AdoptionProcess extends React.Component {
     this.state = {
       people: [],
       submitted: false,
-      //newAdopterAdded: false,
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.newAdoption = this.newAdoption.bind(this)
-    this.pickAndDeleteRandomPet = this.pickAndDeleteRandomPet.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.newAdoption = this.newAdoption.bind(this);
+    this.pickAndDeleteRandomPet = this.pickAndDeleteRandomPet.bind(this);
+    this.seedArtificialUsers = this.seedArtificialUsers.bind(this);
   }
   
   static defaultProps = {
@@ -28,10 +28,8 @@ export default class AdoptionProcess extends React.Component {
   static contextType = ApiContext;
 
   pickAndDeleteRandomPet() {
-    //console.log('lets pick one')
     let choices = ['allCats', 'allDogs'];
     const choice = choices[Math.floor(Math.random() * choices.length)]
-    //console.log(choice);
     fetch(`${config.API_ENDPOINT}/${choice}`, {
       method: 'DELETE',
       headers: {
@@ -50,6 +48,40 @@ export default class AdoptionProcess extends React.Component {
     .catch(error => {
       console.error({ error })
     })
+  }
+
+  seedArtificialUsers() {
+    const artificialUsers = ['Ed', 'Edd', 'Eddy', 'Naz', 'Rolf'];
+    while (this.context.addedArtificialUsers === false) {
+    artificialUsers.forEach((user) => {
+      fetch(`${config.API_ENDPOINT}/people`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          data: user
+        }),
+      })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Something went wrong, try again');
+        }
+        return res.json();
+      })
+      .then((data) => {
+        this.context.addAdopt(data);
+        this.context.addAdopter();
+        this.context.addArtificials();
+      })
+      .catch(error => {
+        console.error({ error })
+      })
+      //this.context.addArtificials();
+      return;
+    })  
+    return;
+    }
   }
 
   newAdoption() {
@@ -72,6 +104,13 @@ export default class AdoptionProcess extends React.Component {
       console.error({ error })
     })
     this.pickAndDeleteRandomPet();
+    const recentlyAddedUser = this.context.addedUser;
+    const peopleRemaining = this.context.people;
+    let current = peopleRemaining.first;
+    current = current.next;
+    if (current.value === recentlyAddedUser) {
+      this.seedArtificialUsers();
+    }
   }
 
   handleSubmit(e) {
@@ -101,10 +140,7 @@ export default class AdoptionProcess extends React.Component {
       console.error({ error })
     })
     this.props.history.push('/adoptionprocess');
-    this.setState({ submitted: true })
-    //this.setState({ newAdopterAdded: true })
-    //console.log(this.context.newAdopterAdded);
-    console.log(this.context.addedUser);
+    this.setState({ submitted: true });
     this.context.manuallyAddUser(name);
   }
 
@@ -125,12 +161,12 @@ export default class AdoptionProcess extends React.Component {
       <p>Thanks for submitting your name! You will be added to our list.</p>
     )
     const peopleRemaining = this.context.people;
-    const recentlyAddedUser = this.context.addedUser;
+    //const recentlyAddedUser = this.context.addedUser;
     //console.log(peopleRemaining['first']['value']);
     //console.log(peopleRemaining['last']['value']);
     let current = peopleRemaining.first;
     current = current.next
-    const conditionalButton = (current.value === recentlyAddedUser) ? (
+    const conditionalButton = (current == null) ? (
       <Link to='/choosepets'>Select your Pet</Link>
     ) : (
       <button type='button' onClick={() => this.newAdoption()}>Click to delete person</button>
