@@ -30,7 +30,7 @@ export default class App extends React.Component {
       yourSelectedPet: [],
       petType: [],
       currentAdoption: [],
-      adoptionBegan: false,
+      //adoptionBegan: false,
     }
   }
   
@@ -134,9 +134,9 @@ export default class App extends React.Component {
     this.setState({ dogs: firstDog })
   }
 
-  handleBeginAdoption = () => {
-    this.setState({ adoptionBegan: true })
-  }
+  //handleBeginAdoption = () => {
+   // this.setState({ adoptionBegan: true })
+  //}
 
   render() {
     const value = {
@@ -173,7 +173,8 @@ export default class App extends React.Component {
       handleAllDogs: this.handleAllDogs,
       handleFirstCat: this.handleFirstCat,
       handleFirstDog: this.handleFirstDog,
-      adoptionBegan: this.state.adoptionBegan,
+      //adoptionBegan: this.state.adoptionBegan,
+      handleBeginAdoption: this.handleBeginAdoption,
     }
 
     return (

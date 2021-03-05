@@ -2,12 +2,12 @@ import React from 'react';
 import ApiContext from '../ApiContext';
 
 export default class AdoptionQueue extends React.Component {
-  constructor(props) {
+  /*constructor(props) {
     super(props)
     this.state = {
       addedArtificialUsers: false,
     }
-  }
+  }*/
   
   static contextType = ApiContext;
 
@@ -24,9 +24,8 @@ export default class AdoptionQueue extends React.Component {
     return spacedArr;
   }
   
-  //const allCats = this.context.allCats;
   const chosenPets = (this.context.currentAdoption === 'allCats') ? (this.context.allCats) : (this.context.allDogs)
-  console.log(this.context.currentAdoption)
+  //console.log(this.context.currentAdoption)
   const generatePeopleWithPet = () => {
     const allThesePeople = this.context.people;
     let current = allThesePeople.first;
@@ -48,8 +47,8 @@ export default class AdoptionQueue extends React.Component {
     const spacedArr = arr.join(', ');
     return spacedArr;
   }
-
-  const newAdopter = (this.context.newAdopterAdded === true) ? (
+   console.log(this.context.addedUser, 'addeduser')
+  const newAdopter = (this.context.newAdopterAdded === true && this.context.addedUser !== []) ? (
     <p>People already in line: {generateAllPeople()}</p>
   ) : (
     <p>

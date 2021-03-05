@@ -154,7 +154,7 @@ export default class AdoptionProcess extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.context.handleBeginAdoption();
+    //this.context.handleBeginAdoption();
     const name = e.target.name.value;
     fetch(`${config.API_ENDPOINT}/people`, {
       method: 'POST',
