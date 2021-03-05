@@ -9,9 +9,6 @@ export default function Navigation() {
     <div className='nav'>
       <div className='links'>
         <Link to='/'>Home</Link>
-        <Link to='/cats'>View Cats</Link><br />
-        <Link to='/dogs'>View Dogs</Link><br />
-        <Link to='/pets'>View All Pets</Link>
         <Link to='/adoptionprocess'>Start Adoption Process</Link><br /> 
       </div>
     </div>

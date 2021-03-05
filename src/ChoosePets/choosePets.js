@@ -29,13 +29,19 @@ export default class choosePets extends React.Component {
         'Content-Type': 'application/json'
       },
     })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error('Something went wrong');
+      }
+      return res.json();
+    })
     .then((data) => {
       this.context.handleYourSelectedPet(data);
     })
     .catch((error) => {
       console.error({ error })
     })
-    
+    console.log(this.context.yourSelectedPet)
     fetch(`${config.API_ENDPOINT}/people`, {
       method: 'DELETE',
       headers: {
@@ -92,12 +98,25 @@ export default class choosePets extends React.Component {
         'Content-Type': 'application/json'
       },
     })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error('Something went wrong, please try again');
+      }
+      return res.json();
+    })
     .then((data) => {
       if (this.context.selectedPetType === 'allCats') {
-        this.handleFirstCat(data)
+        this.context.handleFirstCat(data)
+        this.context.handleYourNewAdoptedPet(data)
+        console.log(this.context.yourNewAdoptedPet)
       } else {
-        this.handleFirstDog(data)
+        this.context.handleFirstDog(data)
+        this.context.handleYourNewAdoptedPet(data)
+        console.log(this.context.yourNewAdoptedPet)
+        
       }
+      
+      console.log(this.context.yourNewAdoptedPet)
     })
     .catch((error) => {
       console.error({ error })
@@ -105,6 +124,7 @@ export default class choosePets extends React.Component {
   }
 
   render() {
+    console.log(this.context.yourNewAdoptedPet)
     const viewAdoption = (this.context.yourAdoption === true) ? (
       <Link to='/youradoption' onClick={() => this.handleView()}>View Your Pet</Link>
     ) : (
