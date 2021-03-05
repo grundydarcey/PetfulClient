@@ -1,0 +1,8 @@
+.nextUpPets {
+  display: flex;
+  justify-content: space-around;
+}
+
+.cats, .dogs {
+  flex-direction: row;
+}

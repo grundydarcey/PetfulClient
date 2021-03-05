@@ -4,12 +4,12 @@ import Navigation from '../Navigation/navigation';
 import './choosePets.css';
 import config from '../config';
 import { Link } from 'react-router-dom';
+import Cats from '../Cats/cats';
+import Dogs from '../Dogs/dogs';
 import AdoptionQueue from '../AdoptionQueue/adoptionqueue';
 
 export default class choosePets extends React.Component {
   static contextType = ApiContext; 
-
-  
 
   handleChange(e) {
     e.preventDefault();
@@ -26,8 +26,40 @@ export default class choosePets extends React.Component {
     fetch(`${config.API_ENDPOINT}/${individualSelection}`, {
       method: 'GET',
       headers: {
-        'Content-type': 'application/json'
+        'Content-Type': 'application/json'
       },
+    })
+    .then((data) => {
+      this.context.handleYourSelectedPet(data);
+    })
+    .catch((error) => {
+      console.error({ error })
+    })
+    
+    fetch(`${config.API_ENDPOINT}/people`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error('Something went wrong, try again.');
+      }
+      return res.json();
+    })
+    .then((data) => {
+      this.context.handleYourAdoption();
+    })
+    .catch((error) => {
+      console.error({ error })
+    })
+    const selection = this.context.selectedPetType;
+    fetch(`${config.API_ENDPOINT}/${selection}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
     })
     .then((res) => {
       if (!res.ok) {
@@ -36,31 +68,36 @@ export default class choosePets extends React.Component {
       return res.json();
     })
     .then((data) => {
-      this.context.handleYourSelectedPet(data);
+      this.context.petGotAdopted(selection);
+      console.log('checking if current is deleted')
     })
     .catch((error) => {
       console.error({ error })
+      console.log('checking once more if current is deleted')
     })
+  }
 
-    const selection = this.context.selectedPetType;
-    console.log(this.context.selectedPetType);
 
-    Promise.all([
-      fetch(`${config.API_ENDPOINT}/${selection}`), 
-      fetch(`${config.API_ENDPOINT}/people`), {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+
+  handleView() {
+    const yourChosenPet = this.context.selectedPetType;
+    const choice = (yourChosenPet === 'allCats') ? (
+      'cats'
+    ) : (
+      'dogs'
+    )
+    fetch(`${config.API_ENDPOINT}/${choice}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+    .then((data) => {
+      if (this.context.selectedPetType === 'allCats') {
+        this.handleFirstCat(data)
+      } else {
+        this.handleFirstDog(data)
       }
-    ])
-    .then(([selectionRes, peopleRes]) => {
-      if (!selectionRes.ok && !peopleRes.ok) return (selectionRes.json().then((e) => Promise.reject(e), peopleRes.json().then((e) => Promise.reject(e))));
-      return Promise.all([selectionRes.json(), peopleRes.json()]);
-    })
-    .then(([selection, people]) => {
-      this.context.petGotAdopted(selection);
-      this.context.handleYourAdoption();
     })
     .catch((error) => {
       console.error({ error })
@@ -69,7 +106,7 @@ export default class choosePets extends React.Component {
 
   render() {
     const viewAdoption = (this.context.yourAdoption === true) ? (
-      <Link to='/youradoption'>View Your Pet</Link>
+      <Link to='/youradoption' onClick={() => this.handleView()}>View Your Pet</Link>
     ) : (
       <p>Please select what animal you'd like.</p>
     )
@@ -93,6 +130,14 @@ export default class choosePets extends React.Component {
           </fieldset>
         </form>
         <AdoptionQueue />
+        <div className='nextUpPets'>
+          <div className='cats'>
+            <Cats />
+          </div>
+          <div className='dogs'>
+            <Dogs />
+          </div>
+        </div>
       </div>
     )
   }
