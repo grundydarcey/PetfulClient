@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Cats from '../Cats/cats';
 import Dogs from '../Dogs/dogs';
 import AdoptionQueue from '../AdoptionQueue/adoptionqueue';
+import './adoptionprocess.css';
 
 export default class AdoptionProcess extends React.Component {
   constructor(props) {
@@ -176,9 +177,11 @@ export default class AdoptionProcess extends React.Component {
         <AdoptionQueue />
         {conditionalButton}
         <div className='nextUpPets'>
-          <div className='pets'>
-          <Cats />
-          <Dogs />
+          <div className='cats'>
+            <Cats />
+          </div>
+          <div className='dogs'>
+            <Dogs />
           </div>
         </div>
       </div>

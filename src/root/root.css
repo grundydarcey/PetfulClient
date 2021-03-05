@@ -14,3 +14,12 @@ h1 {
   background-color: lightgray;
   padding: 5px;
 }
+
+.availablepets {
+  display: flex;
+  justify-content: space-around;
+}
+
+.availablecats, .availabledogs {
+  flex-direction: row;
+}
