@@ -8,6 +8,7 @@ import AdoptionProcess from '../AdoptionProcess/adoptionprocess';
 import config from '../config';
 import ApiContext from '../ApiContext';
 import ChoosePets from '../ChoosePets/choosePets';
+import YourAdoption from '../YourAdoption/youradoption';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -23,6 +24,10 @@ export default class App extends React.Component {
       addedUser: [],
       artificialUsers: [],
       addedArtificialUsers: false,
+      yourAdoption: false,
+      selectedPetType: [],
+      yourPet: [],
+      yourSelectedPet: []
     }
   }
   
@@ -72,13 +77,27 @@ export default class App extends React.Component {
 
   manuallyAddUser = (newUser) => {
     this.setState({ addedUser: newUser })
-    //this.context.addedUser.push(newUser)
   }
 
   addArtificials = () => {
     this.setState({ addedArtificialUsers: true })
   }
+
+  handleYourAdoption = () => {
+    this.setState({ yourAdoption: true })
+  }
+
+  handlePetSelection = (chosenPet) => {
+    this.setState({ selectedPetType: chosenPet })
+  }
   
+  handleYourPet = (chosenPet) => {
+    this.setState({ yourPet: chosenPet })
+  }
+
+  handleYourSelectedPet = (chosenPet) => {
+    this.setState({ yourSelectedPet: chosenPet })
+  }
 
   render() {
     const value = {
@@ -98,6 +117,15 @@ export default class App extends React.Component {
       artificialUsers: this.state.artificialUsers,
       addArtificials: this.addArtificials,
       addedArtificialUsers: this.state.addedArtificialUsers,
+      yourAdoption: this.state.yourAdoption,
+      handleYourAdoption: this.handleYourAdoption,
+      selectedPetType: this.state.selectedPetType,
+      handlePetSelection: this.handlePetSelection,
+      yourPet: this.state.yourPet,
+      handleYourPet: this.handleYourPet,
+      yourSelectedPet: this.state.yourSelectedPet,
+      handleYourSelectedPet: this.handleYourSelectedPet,
+
     }
 
     return (
@@ -109,6 +137,7 @@ export default class App extends React.Component {
           <Route exact path='/pets' component={Pets} />
           <Route exact path='/adoptionprocess' component={AdoptionProcess} />
           <Route exact path='/choosepets' component={ChoosePets} />
+          <Route exact path='/youradoption' component={YourAdoption} />
         </div>
       </ApiContext.Provider>
     )

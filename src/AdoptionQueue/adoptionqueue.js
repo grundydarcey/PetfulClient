@@ -23,11 +23,11 @@ export default class AdoptionQueue extends React.Component {
     const spacedArr = arr.join(', ');
     return spacedArr;
   }
-  console.log(this.context.newAdopterAdded);
+  
   const allCats = this.context.allCats;
-
   const generatePeopleWithPet = () => {
-    let current = allThesePeople.first
+    const allThesePeople = this.context.people;
+    let current = allThesePeople.first;
     let arr = [];
     if (allThesePeople.first['value'] === this.context.addedUser) {
       let currentAdoption = allThesePeople.first['value'];
@@ -36,7 +36,6 @@ export default class AdoptionQueue extends React.Component {
       let currentAdoption = allThesePeople.first['value'] + ` is adopting ` + allCats.first['value']['name'];
       arr.push(currentAdoption)
     }
-    //rr.push(currentAdoption);
     current = current.next;
     if (current !== allThesePeople.first) {
       while (current) {
@@ -55,13 +54,12 @@ export default class AdoptionQueue extends React.Component {
       Adoption Began People already in line: {generatePeopleWithPet()}
     </p>
   )
-  console.log(this.context.people);
+
   return (
     <div className='queue'>
       <h3>View Others Interested In Adoption</h3>
       <p>We have a system of adopting to the interested parties on a first-come-first-serve basis. The people in this list below will be the next to get a pet.</p><br />
       {newAdopter}
-      <button type='button' onClick={() => this.seedArtificialUsers()}>Add fake members</button>
     </div>
     )
   }

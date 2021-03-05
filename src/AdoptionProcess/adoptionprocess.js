@@ -3,6 +3,8 @@ import React from 'react';
 import ApiContext from '../ApiContext';
 import config from '../config';
 import { Link } from 'react-router-dom';
+import Cats from '../Cats/cats';
+import Dogs from '../Dogs/dogs';
 import AdoptionQueue from '../AdoptionQueue/adoptionqueue';
 
 export default class AdoptionProcess extends React.Component {
@@ -146,7 +148,6 @@ export default class AdoptionProcess extends React.Component {
 
 
   render() {
-    console.log(this.context.artificialUsers)
     const submission = (this.state.submitted === false) ? (
       <form onSubmit={(e) => this.handleSubmit(e)}>
           <fieldset>
@@ -160,13 +161,8 @@ export default class AdoptionProcess extends React.Component {
     ) : (
       <p>Thanks for submitting your name! You will be added to our list.</p>
     )
-    const peopleRemaining = this.context.people;
-    //const recentlyAddedUser = this.context.addedUser;
-    //console.log(peopleRemaining['first']['value']);
-    //console.log(peopleRemaining['last']['value']);
-    let current = peopleRemaining.first;
-    current = current.next
-    const conditionalButton = (current == null) ? (
+
+    const conditionalButton = (this.context.addedArtificialUsers === true) ? (
       <Link to='/choosepets'>Select your Pet</Link>
     ) : (
       <button type='button' onClick={() => this.newAdoption()}>Click to delete person</button>
@@ -179,6 +175,12 @@ export default class AdoptionProcess extends React.Component {
         {submission}
         <AdoptionQueue />
         {conditionalButton}
+        <div className='nextUpPets'>
+          <div className='pets'>
+          <Cats />
+          <Dogs />
+          </div>
+        </div>
       </div>
     )
   }
