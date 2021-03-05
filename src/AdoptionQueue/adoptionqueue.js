@@ -48,7 +48,7 @@ export default class AdoptionQueue extends React.Component {
     return spacedArr;
   }
    console.log(this.context.addedUser, 'addeduser')
-  const newAdopter = (this.context.newAdopterAdded === true && this.context.addedUser !== []) ? (
+  const newAdopter = (this.context.newAdopterAdded === false || this.context.submitted === false) ? (
     <p>People already in line: {generateAllPeople()}</p>
   ) : (
     <p>
