@@ -17,7 +17,7 @@ export default class AdoptionProcess extends React.Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.newAdoption = this.newAdoption.bind(this);
-    this.pickAndDeleteRandomPet = this.pickAndDeleteRandomPet.bind(this);
+   // this.pickAndDeleteRandomPet = this.pickAndDeleteRandomPet.bind(this);
     this.seedArtificialUsers = this.seedArtificialUsers.bind(this);
     this.randomDogHelper = this.randomDogHelper.bind(this);
     this.randomCatHelper = this.randomCatHelper.bind(this);
@@ -33,22 +33,41 @@ export default class AdoptionProcess extends React.Component {
   static contextType = ApiContext;
 
   randomDogHelper() {
-    Promise.all([
-      fetch(`${config.API_ENDPOINT}/allDogs`),
-      fetch(`${config.API_ENDPOINT}/dogs`), {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-      }
-    ])
-    .then(([allRes, firstRes]) => {
-      if (!allRes.ok && !firstRes.ok) return (allRes.json().then(() => Promise.reject(), firstRes.json().then(() => Promise.reject())));
-      return Promise.all([allRes.json(), firstRes.json()]);
+    console.log('dog helper started')
+    console.log(this.context.typeAboutToBeAdopted)
+    fetch(`${config.API_ENDPOINT}/allDogs`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
     })
-    .then(([allPets, pet]) => {
-        this.context.handleAllDogs(allPets)
-        this.context.handleFirstDog(pet)
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error('Something went wrong, please try again');
+      }
+      return res.json();
+    })
+    .then((data) => {
+      this.context.handleAllDogs(data);
+      //console.log(this.context.allDogs);
+    })
+    .catch((error) => {
+      console.error({ error })
+    })
+    fetch(`${config.API_ENDPOINT}/dogs`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error('Something went wrong, please try again');
+      }
+      return res.json();
+    })
+    .then((data) => {
+      this.context.handleFirstDog(data);
     })
     .catch((error) => {
       console.error({ error })
@@ -56,38 +75,45 @@ export default class AdoptionProcess extends React.Component {
   }
 
   randomCatHelper() {
-    Promise.all([
-      fetch(`${config.API_ENDPOINT}/allCats`),
-      fetch(`${config.API_ENDPOINT}/cats`), {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-      }
-    ])
-    .then(([allRes, firstRes]) => {
-      if (!allRes.ok && !firstRes.ok) return (allRes.json().then(() => Promise.reject(), firstRes.json().then(() => Promise.reject())));
-      return Promise.all([allRes.json(), firstRes.json()]);
+    console.log('cat helper began');
+    console.log(this.context.typeAboutToBeAdopted)
+    fetch(`${config.API_ENDPOINT}/allCats`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
     })
-    .then(([allPets, pet]) => {
-        this.context.handleAllCats(allPets)
-        this.context.handleFirstCat(pet)
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error('Something went wrong, please try again');
+      }
+      return res.json();
+    })
+    .then((data) => {
+      this.context.handleAllCats(data);
+      
     })
     .catch((error) => {
       console.error({ error })
     })
-  }
-
-  pickAndDeleteRandomPet() {
-    let choices = ['allCats', 'allDogs'];
-    const allChoice = choices[Math.floor(Math.random() * choices.length)]
-    this.context.handleCurrentAdoption(allChoice);
-    console.log(this.context.currentAdoption, 'current adoption')
-    if (allChoice === 'allCats') {
-      this.randomCatHelper();
-    } else {
-      this.randomDogHelper();
-    }
+    fetch(`${config.API_ENDPOINT}/cats`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error('Something went wrong, please try again');
+      }
+      return res.json();
+    })
+    .then((data) => {
+      this.context.handleFirstCat(data);
+    })
+    .catch((error) => {
+      console.error({ error })
+    })
   }
 
   seedArtificialUsers() {
@@ -142,7 +168,12 @@ export default class AdoptionProcess extends React.Component {
     .catch(error  => {
       console.error({ error })
     })
-    this.pickAndDeleteRandomPet();
+    //this.pickAndDeleteRandomPet();
+    if (this.context.typeAboutToBeAdopted === 'allCats') {
+      this.randomCatHelper();
+    } else {
+      this.randomDogHelper();
+    }
     const recentlyAddedUser = this.context.addedUser;
     const peopleRemaining = this.context.people;
     let current = peopleRemaining.first;
@@ -182,6 +213,9 @@ export default class AdoptionProcess extends React.Component {
     this.props.history.push('/adoptionprocess');
     this.setState({ submitted: true });
     this.context.manuallyAddUser(name);
+    let petChoices = ['allCats', 'allDogs'];
+    const randomPetType = petChoices[Math.floor(Math.random() * petChoices.length)];
+    this.context.determineTypeToBeAdopted(randomPetType);
   }
 
 

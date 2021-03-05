@@ -2,19 +2,28 @@ import React from 'react';
 import ApiContext from '../ApiContext';
 
 export default class AdoptionQueue extends React.Component {
-  /*constructor(props) {
+  constructor(props) {
     super(props)
-    this.state = {
-      addedArtificialUsers: false,
-    }
-  }*/
+    this.determineChosenPet = this.determineChosenPet.bind(this);
+    this.generateAllPeople = this.generateAllPeople.bind(this);
+    this.generatePeopleWithPet = this.generatePeopleWithPet.bind(this);
+    //this.generateRandomPetType = this.generateRandomPetType.bind(this);
+  }
   
   static contextType = ApiContext;
 
-  render() {
-  const allThesePeople = this.context.people;
-  const generateAllPeople = () => {
-    let current = allThesePeople.first;
+
+  determineChosenPet() {
+    let chosenPet = (this.context.typeAboutToBeAdopted === 'allCats') ? (
+      this.context.allCats
+    ) : (
+      this.context.allDogs
+    )
+    return chosenPet.first['value']['name']
+  }
+
+  generateAllPeople() {
+    let current = (this.context.people).first;
     let arr = [];
     while (current) {
       arr.push(current.value)
@@ -23,19 +32,28 @@ export default class AdoptionQueue extends React.Component {
     const spacedArr = arr.join(', ');
     return spacedArr;
   }
+
   
-  const chosenPets = (this.context.currentAdoption === 'allCats') ? (this.context.allCats) : (this.context.allDogs)
-  //console.log(this.context.currentAdoption)
-  const generatePeopleWithPet = () => {
+
+  
+
+  generatePeopleWithPet() {
     const allThesePeople = this.context.people;
     let current = allThesePeople.first;
     let arr = [];
     if (allThesePeople.first['value'] === this.context.addedUser) {
-      let currentAdoption = allThesePeople.first['value'];
-      arr.push(currentAdoption)
+      let currentlyAdopted = allThesePeople.first['value'];
+      arr.push(currentlyAdopted)
     } else {
-      let currentAdoption = allThesePeople.first['value'] + ` is adopting ` + chosenPets.first['value']['name'];
-      arr.push(currentAdoption)
+      if (this.context.typeAboutToBeAdopted === 'allCats') {
+        const chosenPet = this.context.allCats;
+        let currentlyAdopted = allThesePeople.first['value'] + ` is adopting ` + chosenPet.first['value']['name'];
+        arr.push(currentlyAdopted);
+      } else {
+        const chosenPet = this.context.allDogs;
+        let currentlyAdopted = allThesePeople.first['value'] + ` is adopting ` + chosenPet.first['value']['name'];
+        arr.push(currentlyAdopted);
+      }
     }
     current = current.next;
     if (current !== allThesePeople.first) {
@@ -47,12 +65,14 @@ export default class AdoptionQueue extends React.Component {
     const spacedArr = arr.join(', ');
     return spacedArr;
   }
-   console.log(this.context.addedUser, 'addeduser')
+
+
+  render() {
   const newAdopter = (this.context.newAdopterAdded === false || this.context.submitted === false) ? (
-    <p>People already in line: {generateAllPeople()}</p>
+    <p>People already in line: {this.generateAllPeople()}</p>
   ) : (
     <p>
-      Adoption Began People already in line: {generatePeopleWithPet()}
+      Adoption Began People already in line: {this.generatePeopleWithPet()}
     </p>
   )
 

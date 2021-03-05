@@ -31,6 +31,7 @@ export default class App extends React.Component {
       petType: [],
       currentAdoption: [],
       //adoptionBegan: false,
+      typeAboutToBeAdopted: [],
     }
   }
   
@@ -138,6 +139,10 @@ export default class App extends React.Component {
    // this.setState({ adoptionBegan: true })
   //}
 
+  determineTypeToBeAdopted = (newType) => {
+    this.setState({ typeAboutToBeAdopted: newType })
+  }
+
   render() {
     const value = {
       cats: this.state.cats,
@@ -175,6 +180,8 @@ export default class App extends React.Component {
       handleFirstDog: this.handleFirstDog,
       //adoptionBegan: this.state.adoptionBegan,
       handleBeginAdoption: this.handleBeginAdoption,
+      typeAboutToBeAdopted: this.state.typeAboutToBeAdopted,
+      determineTypeToBeAdopted: this.determineTypeToBeAdopted,
     }
 
     return (
