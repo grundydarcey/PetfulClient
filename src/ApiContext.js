@@ -15,6 +15,9 @@ const ApiContext = React.createContext({
   selectedPetType: [],
   yourPetType: [],
   yourSelectedPet: [],
+  petType: [],
+  currentAdoption: [],
+  adoptionBegan: false,
 })
 
 export default ApiContext;

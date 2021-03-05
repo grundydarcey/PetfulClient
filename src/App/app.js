@@ -27,7 +27,10 @@ export default class App extends React.Component {
       yourAdoption: false,
       selectedPetType: [],
       yourPet: [],
-      yourSelectedPet: []
+      yourSelectedPet: [],
+      petType: [],
+      currentAdoption: [],
+      adoptionBegan: false,
     }
   }
   
@@ -75,6 +78,18 @@ export default class App extends React.Component {
     this.setState({ allDogs: newData })
   }
 
+  determinePetType = (newPet) => {
+    this.setState({ petType : newPet })
+  }
+
+  petTypeGotAdopted = (newData) => {
+    if (this.context.petType === 'allDogs') {
+      this.setState({ dogs: newData})
+    } else {
+      this.setState({ cats: newData })
+    }
+  }
+
   manuallyAddUser = (newUser) => {
     this.setState({ addedUser: newUser })
   }
@@ -97,6 +112,30 @@ export default class App extends React.Component {
 
   handleYourSelectedPet = (chosenPet) => {
     this.setState({ yourSelectedPet: chosenPet })
+  }
+
+  handleCurrentAdoption = (currentAdoptee) => {
+    this.setState({ currentAdoption: currentAdoptee})
+  }
+
+  handleAllCats = (allNewCats) => {
+    this.setState({ allCats: allNewCats })
+  }
+
+  handleAllDogs = (allNewDogs) => {
+    this.setState({ allDogs: allNewDogs })
+  }
+
+  handleFirstCat = (firstCat) => {
+    this.setState({ cats: firstCat })
+  }
+
+  handleFirstDog = (firstDog) => {
+    this.setState({ dogs: firstDog })
+  }
+
+  handleBeginAdoption = () => {
+    this.setState({ adoptionBegan: true })
   }
 
   render() {
@@ -125,7 +164,16 @@ export default class App extends React.Component {
       handleYourPet: this.handleYourPet,
       yourSelectedPet: this.state.yourSelectedPet,
       handleYourSelectedPet: this.handleYourSelectedPet,
-
+      petType: this.state.petType,
+      petTypeGotAdopted: this.petTypeGotAdopted,
+      determinePetType: this.determinePetType,
+      currentAdoption: this.state.currentAdoption,
+      handleCurrentAdoption: this.handleCurrentAdoption,
+      handleAllCats: this.handleAllCats,
+      handleAllDogs: this.handleAllDogs,
+      handleFirstCat: this.handleFirstCat,
+      handleFirstDog: this.handleFirstDog,
+      adoptionBegan: this.state.adoptionBegan,
     }
 
     return (

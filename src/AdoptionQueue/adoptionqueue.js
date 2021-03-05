@@ -24,7 +24,9 @@ export default class AdoptionQueue extends React.Component {
     return spacedArr;
   }
   
-  const allCats = this.context.allCats;
+  //const allCats = this.context.allCats;
+  const chosenPets = (this.context.currentAdoption === 'allCats') ? (this.context.allCats) : (this.context.allDogs)
+  console.log(this.context.currentAdoption)
   const generatePeopleWithPet = () => {
     const allThesePeople = this.context.people;
     let current = allThesePeople.first;
@@ -33,7 +35,7 @@ export default class AdoptionQueue extends React.Component {
       let currentAdoption = allThesePeople.first['value'];
       arr.push(currentAdoption)
     } else {
-      let currentAdoption = allThesePeople.first['value'] + ` is adopting ` + allCats.first['value']['name'];
+      let currentAdoption = allThesePeople.first['value'] + ` is adopting ` + chosenPets.first['value']['name'];
       arr.push(currentAdoption)
     }
     current = current.next;
@@ -47,7 +49,7 @@ export default class AdoptionQueue extends React.Component {
     return spacedArr;
   }
 
-  const newAdopter = (this.context.newAdopterAdded === false || this.context.submitted === false ) ? (
+  const newAdopter = (this.context.newAdopterAdded === true) ? (
     <p>People already in line: {generateAllPeople()}</p>
   ) : (
     <p>
