@@ -6,6 +6,7 @@ import Cats from '../Cats/cats';
 import Dogs from '../Dogs/dogs';
 import AdoptionQueue from '../AdoptionQueue/adoptionqueue';
 import './adoptionprocess.css';
+import { Link } from 'react-router-dom';
 
 export default class AdoptionProcess extends React.Component {
   constructor(props) {
@@ -22,6 +23,9 @@ export default class AdoptionProcess extends React.Component {
     this.stop = this.stop.bind(this);
     this.seedStop = this.seedStop.bind(this);
   }
+
+  timeout = 0;
+  adoptionCounter = 0;
   
   static defaultProps = {
     history: {
@@ -34,6 +38,25 @@ export default class AdoptionProcess extends React.Component {
 
   static adoptionTimer = 0;
   static seedTimer = 0;
+
+ // componentDidMount() {
+   // this.timeout = setInterval((this.newAdoption = () => {
+    //  this.adoptionCounter += 1;
+     // this.stop();
+    //}, 5000));
+    //this.context.adoptionTimer = setInterval(() => {
+    //  this.context.adoptionCounter += 1;
+     // if (this.context.adoptionCounter === 3) {
+      //  clearInterval(this.context.adoptionTimer)
+     // }
+  //}
+
+  // componentWillUnmount() {
+  //   if (this.adoptionCounter === 3) {
+  //     clearInterval(this.timeout);
+  //   }
+  // }
+  
 
   randomDogHelper() {
     fetch(`${config.API_ENDPOINT}/allDogs`, {
@@ -159,11 +182,17 @@ export default class AdoptionProcess extends React.Component {
     clearInterval(this.context.seedTimer);
   }
 
- 
-
   newAdoption() {
-    console.log(this.context.addedUser)
-    //this.context.adoptionTimer = setInterval(() => {
+   // this.timeout = setInterval((this.newAdoption = () => {
+    //  this.adoptionCounter += 1;
+    this.timeout = setInterval(() => {
+        this.adoptionCounter += 1;
+        this.stop();
+   // this.context.adoptionTimer = setInterval(() => {
+    //  this.context.adoptionCounter += 1;
+     // if (this.context.adoptionCounter === 3) {
+      //  clearInterval(this.context.adoptionTimer)
+     // }
     fetch(`${config.API_ENDPOINT}/people`, {
       method: 'DELETE',
       headers: {
@@ -178,8 +207,8 @@ export default class AdoptionProcess extends React.Component {
     })
     .then((data) => {
       this.context.gotAdopted(data);
-      clearInterval(this.context.adoptionTimer) 
-      this.stop(); 
+     // clearInterval(this.context.adoptionTimer) 
+      //this.stop(); 
     })
     .catch(error  => {
       console.error({ error })
@@ -200,19 +229,22 @@ export default class AdoptionProcess extends React.Component {
       //clearInterval(this.context.adoptionTimer)
       //this.stop();
      // this.seedArtificialUsers();
-       clearInterval(this.adoptionTimer)
+      // clearInterval(this.adoptionTimer)
        
      }
      //this.seedArtificialUsers();
-    //}, 5000)
+    }, 5000)
   }
  
 
 
-  stop() {
-    //clearInterval(this.context.addedUseradoptionTimer);
-    //this.seedArtificialUsers();
-  }
+   stop() {
+     //clearInterval(this.context.addedUseradoptionTimer);
+     //this.seedArtificialUsers();
+    if (this.adoptionCounter === 3) {
+      clearInterval(this.timeout);
+    }
+   }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -247,7 +279,12 @@ export default class AdoptionProcess extends React.Component {
     const randomPetType = petChoices[Math.floor(Math.random() * petChoices.length)];
     this.context.determineTypeToBeAdopted(randomPetType);
     this.newAdoption()
-    this.context.adoptionTimer = setInterval(this.newAdoption, 5000)
+    // this.context.adoptionTimer = setInterval(this.newAdoption = () => {
+    //   this.context.adoptionCounter += 1;
+    //   if (this.context.adoptionCounter === 3) {
+    //     clearInterval(this.context.adoptionTimer)
+    //   }
+    // }, 5000)
     console.log(this.context.addedUser)
   }
 
@@ -270,7 +307,8 @@ export default class AdoptionProcess extends React.Component {
       <div className='adoption'>
         <Navigation />
         <h2>Choose Your Pet</h2>
-        <p>Time to choose your pet</p>
+        <p>Click below to choose your pet!</p>
+        <Link to='/choosepets'>Make Your Selection</Link>
         <AdoptionQueue />
         <div className='nextUpPets'>
           <div className='cats'>

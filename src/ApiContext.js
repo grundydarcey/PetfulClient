@@ -23,6 +23,7 @@ const ApiContext = React.createContext({
   yourFinalPet: [],
   adoptionTimer: 0,
   seedTimer: 0,
+  adoptionCounter: 0,
 })
 
 export default ApiContext;
