@@ -2,8 +2,7 @@ import React from 'react';
 import Navigation from '../Navigation/navigation';
 import ApiContext from '../ApiContext';
 import AdoptionQueue from '../AdoptionQueue/adoptionqueue';
-import Cats from '../Cats/cats';
-import Dogs from '../Dogs/dogs';
+import PetDisplay from '../PetDisplay/petdisplay';
 import './youradoption.css';
 import config from '../config';
 
@@ -65,13 +64,7 @@ export default class YourAdoption extends React.Component {
           </p>
           <AdoptionQueue />
           <div className='nextUpPets'>
-            <div className='cats'>
-             <Cats />
-            </div>
-            <div className='dogs'>
-              <Dogs />
-            </div>
-
+            <PetDisplay />
           </div>
       </div>
     )

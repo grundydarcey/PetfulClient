@@ -2,8 +2,7 @@ import Navigation from '../Navigation/navigation';
 import React from 'react';
 import ApiContext from '../ApiContext';
 import config from '../config';
-import Cats from '../Cats/cats';
-import Dogs from '../Dogs/dogs';
+import PetDisplay from '../PetDisplay/petdisplay';
 import AdoptionQueue from '../AdoptionQueue/adoptionqueue';
 import './adoptionprocess.css';
 import { Link } from 'react-router-dom';
@@ -264,12 +263,7 @@ export default class AdoptionProcess extends React.Component {
         <Link to='/choosepets'>Make Your Selection</Link>
         <AdoptionQueue />
         <div className='nextUpPets'>
-          <div className='cats'>
-            <Cats />
-          </div>
-          <div className='dogs'>
-            <Dogs />
-          </div>
+          <PetDisplay />
         </div>
       </div>
     ) : (
@@ -279,12 +273,7 @@ export default class AdoptionProcess extends React.Component {
         {submission}
         <AdoptionQueue />
         <div className='nextUpPets'>
-          <div className='cats'>
-            <Cats />
-          </div>
-          <div className='dogs'>
-            <Dogs />
-          </div>
+          <PetDisplay />
         </div>
       </div>
 

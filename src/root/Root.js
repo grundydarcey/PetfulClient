@@ -3,8 +3,7 @@ import Paperwork from '../Images/paperwork.jpg';
 import { Link } from 'react-router-dom';
 import Navigation from '../Navigation/navigation';
 import './root.css';
-import Cats from '../Cats/cats';
-import Dogs from '../Dogs/dogs';
+import PetDisplay from '../PetDisplay/petdisplay';
 
 function Root() {
   
@@ -19,14 +18,8 @@ function Root() {
         <p>Feel free to visit some of the navigation links up top to see the animals currently up for adoption!</p>
         <img src={Paperwork} alt='paperwork' />
         <div className='availablepets'>
-          <div className='availablecats'>
-            <Cats />
-          </div>
-          <div className='availabledogs'>
-            <Dogs />
-          </div>
+          <PetDisplay />
         </div>
-
       </div>
     </div>
   )

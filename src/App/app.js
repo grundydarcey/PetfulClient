@@ -9,6 +9,7 @@ import config from '../config';
 import ApiContext from '../ApiContext';
 import ChoosePets from '../ChoosePets/choosePets';
 import YourAdoption from '../YourAdoption/youradoption';
+import './app.css';
 
 export default class App extends React.Component {
   constructor(props) {

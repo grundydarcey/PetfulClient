@@ -4,9 +4,9 @@ import Navigation from '../Navigation/navigation';
 import './choosePets.css';
 import config from '../config';
 import { Link } from 'react-router-dom';
-import Cats from '../Cats/cats';
-import Dogs from '../Dogs/dogs';
+import PetDisplay from '../PetDisplay/petdisplay';
 import AdoptionQueue from '../AdoptionQueue/adoptionqueue';
+import './choosePets.css';
 
 export default class choosePets extends React.Component {
   static contextType = ApiContext; 
@@ -180,12 +180,7 @@ export default class choosePets extends React.Component {
         </form>
         <AdoptionQueue />
         <div className='nextUpPets'>
-          <div className='cats'>
-            <Cats />
-          </div>
-          <div className='dogs'>
-            <Dogs />
-          </div>
+          <PetDisplay />
         </div>
       </div>
     )
