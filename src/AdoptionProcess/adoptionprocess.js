@@ -26,6 +26,8 @@ export default class AdoptionProcess extends React.Component {
 
   timeout = 0;
   adoptionCounter = 0;
+  seedTimeout = 0;
+  seedCounter = 0;
   
   static defaultProps = {
     history: {
@@ -35,28 +37,6 @@ export default class AdoptionProcess extends React.Component {
   }
 
   static contextType = ApiContext;
-
-  static adoptionTimer = 0;
-  static seedTimer = 0;
-
- // componentDidMount() {
-   // this.timeout = setInterval((this.newAdoption = () => {
-    //  this.adoptionCounter += 1;
-     // this.stop();
-    //}, 5000));
-    //this.context.adoptionTimer = setInterval(() => {
-    //  this.context.adoptionCounter += 1;
-     // if (this.context.adoptionCounter === 3) {
-      //  clearInterval(this.context.adoptionTimer)
-     // }
-  //}
-
-  // componentWillUnmount() {
-  //   if (this.adoptionCounter === 3) {
-  //     clearInterval(this.timeout);
-  //   }
-  // }
-  
 
   randomDogHelper() {
     fetch(`${config.API_ENDPOINT}/allDogs`, {
@@ -138,113 +118,93 @@ export default class AdoptionProcess extends React.Component {
   }
 
   seedArtificialUsers() {
-    this.context.seedTimer = setInterval(() => {
     const artificialUsers = ['Ed', 'Edd', 'Eddy', 'Naz', 'Rolf'];
-    while (this.context.addedArtificialUsers === false) {
-    artificialUsers.forEach((user) => {
+      artificialUsers.forEach((user) => {
+        this.seedTimeout = setInterval(() => {
+          this.seedCounter += 1;
+          this.seedStop();
+          fetch(`${config.API_ENDPOINT}/people`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              data: user
+            }),
+          })
+          .then(res => {
+                if (!res.ok) {
+                  throw new Error('Something went wrong, try again');
+                }
+                return res.json();
+              })
+          .then((data) => {
+                this.context.addAdopt(data);
+                this.context.addAdopter();
+                this.context.addArtificials();
+                clearInterval(this.context.seedTimer);
+                this.seedStop();
+               })
+          .catch(error => {
+                console.error({ error })
+          })
+        }, 5000)
+      }
+      )}
+          
+     // }
+    
+  
+
+  seedStop() {
+    if (this.seedCounter === 1) {
+      clearInterval(this.seedTimeout);
+    }
+  }
+
+  newAdoption() {
+    this.timeout = setInterval(() => {
+      this.adoptionCounter += 1;
+      this.stop();
+      //this.seedArtificialUsers();
       fetch(`${config.API_ENDPOINT}/people`, {
-        method: 'POST',
+        method: 'DELETE',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          data: user
-        }),
       })
-      .then(res => {
+      .then((res) => {
         if (!res.ok) {
-          throw new Error('Something went wrong, try again');
+          throw new Error('Something went wrong, please try again');
         }
         return res.json();
       })
       .then((data) => {
-        this.context.addAdopt(data);
-        this.context.addAdopter();
-        this.context.addArtificials();
-        clearInterval(this.context.seedTimer);
-        this.seedStop();
+        this.context.gotAdopted(data);
       })
-      .catch(error => {
+      .catch(error  => {
         console.error({ error })
       })
-      //clearInterval(this.context.seedTimer);
-      //this.seedStop();
-      return;
-    })  
-    return;
-    }
-//    clearInterval(this.seedTimer);
-  //  this.seedStop();
-    }, 5000);
-  }
-
-  seedStop() {
-    clearInterval(this.context.seedTimer);
-  }
-
-  newAdoption() {
-   // this.timeout = setInterval((this.newAdoption = () => {
-    //  this.adoptionCounter += 1;
-    this.timeout = setInterval(() => {
-        this.adoptionCounter += 1;
-        this.stop();
-   // this.context.adoptionTimer = setInterval(() => {
-    //  this.context.adoptionCounter += 1;
-     // if (this.context.adoptionCounter === 3) {
-      //  clearInterval(this.context.adoptionTimer)
-     // }
-    fetch(`${config.API_ENDPOINT}/people`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    })
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error('Something went wrong, please try again');
+      if (this.context.typeAboutToBeAdopted === 'allCats') {
+        this.randomCatHelper();
+      } else {
+        this.randomDogHelper();
       }
-      return res.json();
-    })
-    .then((data) => {
-      this.context.gotAdopted(data);
-     // clearInterval(this.context.adoptionTimer) 
-      //this.stop(); 
-    })
-    .catch(error  => {
-      console.error({ error })
-    })
-    if (this.context.typeAboutToBeAdopted === 'allCats') {
-      this.randomCatHelper();
-    } else {
-      this.randomDogHelper();
-    }
-    /*if (this.context.addedUser.length > 0) {
-      this.stop();
-    }*/
-    //clearInterval(this.context.adoptionTimer)
-     const recentlyAddedUser = this.context.addedUser;
-     const peopleRemaining = this.context.people;
-     let current = peopleRemaining.first;
-     if (current.value === recentlyAddedUser) {
-      //clearInterval(this.context.adoptionTimer)
-      //this.stop();
-     // this.seedArtificialUsers();
-      // clearInterval(this.adoptionTimer)
-       
-     }
-     //this.seedArtificialUsers();
+      
+        this.seedArtificialUsers();
+      
     }, 5000)
+    
+      //this.seedArtificialUsers();
+    
   }
- 
 
-
-   stop() {
-     //clearInterval(this.context.addedUseradoptionTimer);
-     //this.seedArtificialUsers();
+  stop() {
     if (this.adoptionCounter === 3) {
       clearInterval(this.timeout);
     }
-   }
+  
+  }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -268,6 +228,7 @@ export default class AdoptionProcess extends React.Component {
       this.context.addAdopt(name)
       this.context.addAdopter();
       this.context.manuallyAddUser(name.last);
+      console.log(name.last)
       console.log(this.context.addedUser);
     })
     .catch(error => {
@@ -278,14 +239,8 @@ export default class AdoptionProcess extends React.Component {
     let petChoices = ['allCats', 'allDogs'];
     const randomPetType = petChoices[Math.floor(Math.random() * petChoices.length)];
     this.context.determineTypeToBeAdopted(randomPetType);
-    this.newAdoption()
-    // this.context.adoptionTimer = setInterval(this.newAdoption = () => {
-    //   this.context.adoptionCounter += 1;
-    //   if (this.context.adoptionCounter === 3) {
-    //     clearInterval(this.context.adoptionTimer)
-    //   }
-    // }, 5000)
-    console.log(this.context.addedUser)
+    this.newAdoption();
+    
   }
 
   render() {
