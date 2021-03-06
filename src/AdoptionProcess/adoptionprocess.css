@@ -6,3 +6,8 @@
 .cats, .dogs {
   flex-direction: row;
 }
+
+.submit {
+  padding: 10px;
+  font-size: 15px;
+}
