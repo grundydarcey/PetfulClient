@@ -14,7 +14,6 @@ function Root() {
       <p>You will have to provide your name so that we may review your eligibility for adopting one of our pets.</p><br />
       <div className='linksimages'>
         <Link to='/adoptionprocess'>Start Adoption</Link><br /><br /><br />
-        
         <img src={Paperwork} alt='paperwork' className='paperwork' />
         <div className='availablepets'>
           <PetDisplay />
