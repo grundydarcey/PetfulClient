@@ -36,21 +36,6 @@ export default class AdoptionQueue extends React.Component {
     const allThesePeople = this.context.people;
     let current = allThesePeople.first;
     let arr = [];
-   /* if (allThesePeople.first['value'] === this.context.addedUser) {
-      let currentlyAdopted = allThesePeople.first['value'];
-      arr.push(currentlyAdopted)
-    } else {
-      if (this.context.typeAboutToBeAdopted === 'allCats') {
-        const chosenPet = this.context.allCats;
-        let currentlyAdopted = allThesePeople.first['value'] + ` is adopting ` + chosenPet.first['value']['name'];
-        arr.push(currentlyAdopted);
-      } else if (this.context.typeAboutToBeAdopted === 'allDogs') {
-        const chosenPet = this.context.allDogs;
-        let currentlyAdopted = allThesePeople.first['value'] + ` is adopting ` + chosenPet.first['value']['name'];
-        arr.push(currentlyAdopted);
-      }
-    }*/
-
     if (allThesePeople.first['value'] !== this.context.addedUser['value']) {
       if (this.context.typeAboutToBeAdopted === 'allCats') {
         const chosenPet = this.context.allCats;
@@ -65,9 +50,6 @@ export default class AdoptionQueue extends React.Component {
       let currentlyAdopted = allThesePeople.first['value'];
       arr.push(currentlyAdopted)
     }
-
-
-
     current = current.next;
     if (current !== allThesePeople.first) {
       while (current) {
@@ -94,12 +76,6 @@ export default class AdoptionQueue extends React.Component {
       Adoption Began People already in line: {this.generatePeopleWithPet()}
     </p>
   )
-
-  // const finalAdopter = (this.context.people.first === this.context.people.last) ? (
-  //   <p>People already in line: {this.generateLastPerson()}</p>
-  // ) : (
-  //   {newAdopter}
-  // )
 
   return (
     <div className='queue'>

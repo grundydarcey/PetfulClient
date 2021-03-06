@@ -21,6 +21,7 @@ export default class AdoptionProcess extends React.Component {
     this.randomCatHelper = this.randomCatHelper.bind(this);
     this.stop = this.stop.bind(this);
     this.seedStop = this.seedStop.bind(this);
+   // this.runIfNewIsFirst = this.runIfNewIsFirst.bind(this);
   }
 
   timeout = 0;
@@ -118,10 +119,12 @@ export default class AdoptionProcess extends React.Component {
 
   seedArtificialUsers() {
     const artificialUsers = ['Ed', 'Edd', 'Eddy', 'Naz', 'Rolf'];
+      
+    this.seedTimeout = setInterval(() => {
+      this.seedCounter += 1;
+      this.seedStop();
       artificialUsers.forEach((user) => {
-        this.seedTimeout = setInterval(() => {
-          this.seedCounter += 1;
-          this.seedStop();
+      
           fetch(`${config.API_ENDPOINT}/people`, {
             method: 'POST',
             headers: {
@@ -189,10 +192,13 @@ export default class AdoptionProcess extends React.Component {
       }
       
         //this.seedArtificialUsers();
-      
+        //if (this.context.people.first === this.context.people.last) {
+          this.seedArtificialUsers();
+        //} 
     }, 5000)
+    console.log(this.context.people)
     
-      this.seedArtificialUsers();
+      //this.seedArtificialUsers();
     
   }
 
@@ -201,7 +207,9 @@ export default class AdoptionProcess extends React.Component {
       clearInterval(this.timeout);
     }
     //this.seedArtificialUsers();
+    
   }
+
 
   handleSubmit(e) {
     e.preventDefault();
@@ -223,10 +231,12 @@ export default class AdoptionProcess extends React.Component {
     })
     .then((name) => {
       this.context.addAdopt(name)
+      console.log(this.context.people)
       this.context.addAdopter();
       this.context.manuallyAddUser(name.last);
       console.log(name.last)
       console.log(this.context.addedUser);
+      console.log(typeof (this.context.addedUser))
     })
     .catch(error => {
       console.error({ error })
@@ -237,10 +247,25 @@ export default class AdoptionProcess extends React.Component {
     const randomPetType = petChoices[Math.floor(Math.random() * petChoices.length)];
     this.context.determineTypeToBeAdopted(randomPetType);
     this.newAdoption();
-    
+    console.log(this.context.people['first'])
+    console.log(this.context.people['last'])
+    console.log(this.context.people.first)
+    console.log(this.context.people.last)
+    console.log(this.context.people.first['value'])
+    console.log(this.context.people.last['value'])
+    // if (this.context.people.first['value'] === this.context.people.last['value']) {
+    //   this.seedArtificialUsers();
+    // } else {
+    //   return;
+    // }
   }
 
+  
+  
+
   render() {
+    console.log(this.context.addedUser)
+   
     const submission = (this.state.submitted === false) ? (
       <form onSubmit={(e) => this.handleSubmit(e)}>
           <fieldset>
