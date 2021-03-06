@@ -142,19 +142,17 @@ export default class AdoptionProcess extends React.Component {
                 this.context.addAdopt(data);
                 this.context.addAdopter();
                 this.context.addArtificials();
-                clearInterval(this.context.seedTimer);
-                this.seedStop();
+                //clearInterval(this.context.seedTimer);
+                //this.seedStop();
                })
           .catch(error => {
                 console.error({ error })
           })
+          clearInterval(this.context.seedTimer);
+          this.seedStop();
         }, 5000)
       }
       )}
-          
-     // }
-    
-  
 
   seedStop() {
     if (this.seedCounter === 1) {
@@ -191,11 +189,11 @@ export default class AdoptionProcess extends React.Component {
         this.randomDogHelper();
       }
       
-        this.seedArtificialUsers();
+        //this.seedArtificialUsers();
       
     }, 5000)
     
-      //this.seedArtificialUsers();
+      this.seedArtificialUsers();
     
   }
 
@@ -203,7 +201,7 @@ export default class AdoptionProcess extends React.Component {
     if (this.adoptionCounter === 3) {
       clearInterval(this.timeout);
     }
-  
+    //this.seedArtificialUsers();
   }
 
   handleSubmit(e) {
