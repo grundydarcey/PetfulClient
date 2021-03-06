@@ -6,3 +6,10 @@
 .cats {
   text-align: center;
 }
+
+@media all and (min-width: 100px) and (max-width: 800px) {
+  .nextcat {
+    width: 200px;
+    height: 175px;
+  }
+}

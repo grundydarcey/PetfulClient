@@ -73,7 +73,7 @@ export default class AdoptionQueue extends React.Component {
     <p>People already in line: {this.generateAllPeople()}</p>
   ) : (
     <p>
-      Adoption Began People already in line: {this.generatePeopleWithPet()}
+      People already in line: {this.generatePeopleWithPet()}
     </p>
   )
 
