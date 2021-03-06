@@ -15,7 +15,7 @@ function Root() {
       <div className='linksimages'>
         <Link to='/adoptionprocess'>Start Adoption</Link><br /><br />
         <p>Feel free to visit some of the navigation links up top to see the animals currently up for adoption!</p>
-        <img src={Paperwork} alt='paperwork' />
+        <img src={Paperwork} alt='paperwork' className='paperwork' />
         <div className='availablepets'>
           <PetDisplay />
         </div>
