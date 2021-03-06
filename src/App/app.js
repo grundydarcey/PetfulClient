@@ -34,6 +34,8 @@ export default class App extends React.Component {
       typeAboutToBeAdopted: [],
       yourNewAdoptedPet: [],
       yourFinalPet: [],
+      adoptionTimer: 0,
+      seedTimer: 0,
     }
   }
   
@@ -192,6 +194,8 @@ export default class App extends React.Component {
       handleYourNewAdoptedPet: this.handleYourNewAdoptedPet,
       yourFinalPet: this.state.yourFinalPet,
       handleYourFinalPet: this.handleYourFinalPet,
+      adoptionTimer: this.state.adoptionTimer,
+      seedTimer: this.state.seedTimer,
     }
 
     return (

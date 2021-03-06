@@ -7,11 +7,9 @@ export default class AdoptionQueue extends React.Component {
     this.determineChosenPet = this.determineChosenPet.bind(this);
     this.generateAllPeople = this.generateAllPeople.bind(this);
     this.generatePeopleWithPet = this.generatePeopleWithPet.bind(this);
-    //this.generateRandomPetType = this.generateRandomPetType.bind(this);
   }
   
   static contextType = ApiContext;
-
 
   determineChosenPet() {
     let chosenPet = (this.context.typeAboutToBeAdopted === 'allCats') ? (
@@ -38,6 +36,8 @@ export default class AdoptionQueue extends React.Component {
   
 
   generatePeopleWithPet() {
+    console.log(this.context.addedUser)
+    console.log(this.context.people.first)
     const allThesePeople = this.context.people;
     let current = allThesePeople.first;
     let arr = [];
@@ -49,9 +49,12 @@ export default class AdoptionQueue extends React.Component {
         const chosenPet = this.context.allCats;
         let currentlyAdopted = allThesePeople.first['value'] + ` is adopting ` + chosenPet.first['value']['name'];
         arr.push(currentlyAdopted);
-      } else {
+      } else if (this.context.typeAboutToBeAdopted === 'allDogs') {
         const chosenPet = this.context.allDogs;
         let currentlyAdopted = allThesePeople.first['value'] + ` is adopting ` + chosenPet.first['value']['name'];
+        arr.push(currentlyAdopted);
+      } else if (this.context.addedUser['value'] === allThesePeople.first['value']) {
+        let currentlyAdopted = allThesePeople.first['value'];
         arr.push(currentlyAdopted);
       }
     }

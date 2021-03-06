@@ -2,7 +2,6 @@ import Navigation from '../Navigation/navigation';
 import React from 'react';
 import ApiContext from '../ApiContext';
 import config from '../config';
-import { Link } from 'react-router-dom';
 import Cats from '../Cats/cats';
 import Dogs from '../Dogs/dogs';
 import AdoptionQueue from '../AdoptionQueue/adoptionqueue';
@@ -17,10 +16,11 @@ export default class AdoptionProcess extends React.Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.newAdoption = this.newAdoption.bind(this);
-   // this.pickAndDeleteRandomPet = this.pickAndDeleteRandomPet.bind(this);
     this.seedArtificialUsers = this.seedArtificialUsers.bind(this);
     this.randomDogHelper = this.randomDogHelper.bind(this);
     this.randomCatHelper = this.randomCatHelper.bind(this);
+    this.stop = this.stop.bind(this);
+    this.seedStop = this.seedStop.bind(this);
   }
   
   static defaultProps = {
@@ -32,9 +32,10 @@ export default class AdoptionProcess extends React.Component {
 
   static contextType = ApiContext;
 
+  static adoptionTimer = 0;
+  static seedTimer = 0;
+
   randomDogHelper() {
-    console.log('dog helper started')
-    console.log(this.context.typeAboutToBeAdopted)
     fetch(`${config.API_ENDPOINT}/allDogs`, {
       method: 'DELETE',
       headers: {
@@ -49,7 +50,6 @@ export default class AdoptionProcess extends React.Component {
     })
     .then((data) => {
       this.context.handleAllDogs(data);
-      //console.log(this.context.allDogs);
     })
     .catch((error) => {
       console.error({ error })
@@ -75,8 +75,6 @@ export default class AdoptionProcess extends React.Component {
   }
 
   randomCatHelper() {
-    console.log('cat helper began');
-    console.log(this.context.typeAboutToBeAdopted)
     fetch(`${config.API_ENDPOINT}/allCats`, {
       method: 'DELETE',
       headers: {
@@ -117,6 +115,7 @@ export default class AdoptionProcess extends React.Component {
   }
 
   seedArtificialUsers() {
+    this.context.seedTimer = setInterval(() => {
     const artificialUsers = ['Ed', 'Edd', 'Eddy', 'Naz', 'Rolf'];
     while (this.context.addedArtificialUsers === false) {
     artificialUsers.forEach((user) => {
@@ -139,17 +138,32 @@ export default class AdoptionProcess extends React.Component {
         this.context.addAdopt(data);
         this.context.addAdopter();
         this.context.addArtificials();
+        clearInterval(this.context.seedTimer);
+        this.seedStop();
       })
       .catch(error => {
         console.error({ error })
       })
+      //clearInterval(this.context.seedTimer);
+      //this.seedStop();
       return;
     })  
     return;
     }
+//    clearInterval(this.seedTimer);
+  //  this.seedStop();
+    }, 5000);
   }
 
+  seedStop() {
+    clearInterval(this.context.seedTimer);
+  }
+
+ 
+
   newAdoption() {
+    console.log(this.context.addedUser)
+    //this.context.adoptionTimer = setInterval(() => {
     fetch(`${config.API_ENDPOINT}/people`, {
       method: 'DELETE',
       headers: {
@@ -164,28 +178,44 @@ export default class AdoptionProcess extends React.Component {
     })
     .then((data) => {
       this.context.gotAdopted(data);
+      clearInterval(this.context.adoptionTimer) 
+      this.stop(); 
     })
     .catch(error  => {
       console.error({ error })
     })
-    //this.pickAndDeleteRandomPet();
     if (this.context.typeAboutToBeAdopted === 'allCats') {
       this.randomCatHelper();
     } else {
       this.randomDogHelper();
     }
-    const recentlyAddedUser = this.context.addedUser;
-    const peopleRemaining = this.context.people;
-    let current = peopleRemaining.first;
-    current = current.next;
-    if (current.value === recentlyAddedUser) {
-      this.seedArtificialUsers();
-    }
+    /*if (this.context.addedUser.length > 0) {
+      this.stop();
+    }*/
+    //clearInterval(this.context.adoptionTimer)
+     const recentlyAddedUser = this.context.addedUser;
+     const peopleRemaining = this.context.people;
+     let current = peopleRemaining.first;
+     if (current.value === recentlyAddedUser) {
+      //clearInterval(this.context.adoptionTimer)
+      //this.stop();
+     // this.seedArtificialUsers();
+       clearInterval(this.adoptionTimer)
+       
+     }
+     //this.seedArtificialUsers();
+    //}, 5000)
+  }
+ 
+
+
+  stop() {
+    //clearInterval(this.context.addedUseradoptionTimer);
+    //this.seedArtificialUsers();
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    //this.context.handleBeginAdoption();
     const name = e.target.name.value;
     fetch(`${config.API_ENDPOINT}/people`, {
       method: 'POST',
@@ -205,19 +235,21 @@ export default class AdoptionProcess extends React.Component {
     .then((name) => {
       this.context.addAdopt(name)
       this.context.addAdopter();
-      
+      this.context.manuallyAddUser(name.last);
+      console.log(this.context.addedUser);
     })
     .catch(error => {
       console.error({ error })
     })
     this.props.history.push('/adoptionprocess');
-    this.setState({ submitted: true });
-    this.context.manuallyAddUser(name);
+    this.setState({ submitted: true })
     let petChoices = ['allCats', 'allDogs'];
     const randomPetType = petChoices[Math.floor(Math.random() * petChoices.length)];
     this.context.determineTypeToBeAdopted(randomPetType);
+    this.newAdoption()
+    this.context.adoptionTimer = setInterval(this.newAdoption, 5000)
+    console.log(this.context.addedUser)
   }
-
 
   render() {
     const submission = (this.state.submitted === false) ? (
@@ -233,20 +265,13 @@ export default class AdoptionProcess extends React.Component {
     ) : (
       <p>Thanks for submitting your name! You will be added to our list.</p>
     )
-
-    const conditionalButton = (this.context.addedArtificialUsers === true) ? (
-      <Link to='/choosepets'>Select your Pet</Link>
-    ) : (
-      <button type='button' onClick={() => this.newAdoption()}>Click to delete person</button>
-    )
-
-    return (
+    
+    const determineYourTurn = (this.context.people.first['value'] === this.context.addedUser['value']) ? (
       <div className='adoption'>
         <Navigation />
-        <h2>Adoption Requirements</h2>
-        {submission}
+        <h2>Choose Your Pet</h2>
+        <p>Time to choose your pet</p>
         <AdoptionQueue />
-        {conditionalButton}
         <div className='nextUpPets'>
           <div className='cats'>
             <Cats />
@@ -255,6 +280,27 @@ export default class AdoptionProcess extends React.Component {
             <Dogs />
           </div>
         </div>
+      </div>
+    ) : (
+      <div className='adoption'>
+        <Navigation />
+        <h2>Adoption Requirements</h2>
+        {submission}
+        <AdoptionQueue />
+        <div className='nextUpPets'>
+          <div className='cats'>
+            <Cats />
+          </div>
+          <div className='dogs'>
+            <Dogs />
+          </div>
+        </div>
+      </div>
+
+    )
+    return (
+      <div className='adoptionPage'>
+        {determineYourTurn}
       </div>
     )
   }
