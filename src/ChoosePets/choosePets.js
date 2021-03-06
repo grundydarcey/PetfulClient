@@ -92,6 +92,35 @@ export default class choosePets extends React.Component {
     ) : (
       'dogs'
     )
+    
+    fetch(`${config.API_ENDPOINT}/${choice}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'http://localhost:3000',
+      },
+    })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error('Something went wrong');
+      }
+      return res.json();
+    })
+    .then((data) => {
+      if (this.context.selectedPetType === 'allCats') {
+        this.context.handleFirstCat(data)
+        this.context.handleYourNewAdoptedPet(data)
+      } else {
+        this.context.handleFirstDog(data)
+        this.context.handleYourNewAdoptedPet(data)       
+      }
+      this.context.handleYourNewAdoptedPet(data)
+    })
+    .catch((error) => {
+      console.error({ error })
+    })
+    
+
     fetch(`${config.API_ENDPOINT}/${choice}`, {
       method: 'DELETE',
       headers: {
@@ -107,13 +136,13 @@ export default class choosePets extends React.Component {
     .then((data) => {
       if (this.context.selectedPetType === 'allCats') {
         this.context.handleFirstCat(data)
-        this.context.handleYourNewAdoptedPet(data)
-        console.log(this.context.yourNewAdoptedPet)
+        //this.context.handleYourNewAdoptedPet(data)
+        
+        
       } else {
         this.context.handleFirstDog(data)
-        this.context.handleYourNewAdoptedPet(data)
-        console.log(this.context.yourNewAdoptedPet)
-        
+      
+       
       }
       
       console.log(this.context.yourNewAdoptedPet)

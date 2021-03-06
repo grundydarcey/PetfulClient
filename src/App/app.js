@@ -33,6 +33,7 @@ export default class App extends React.Component {
       //adoptionBegan: false,
       typeAboutToBeAdopted: [],
       yourNewAdoptedPet: [],
+      yourFinalPet: [],
     }
   }
   
@@ -144,6 +145,10 @@ export default class App extends React.Component {
     this.setState({ typeAboutToBeAdopted: newType })
   }
 
+  handleYourFinalPet = (yourPet) => {
+    this.setState({ yourFinalPet: yourPet })
+  }
+
   render() {
     const value = {
       cats: this.state.cats,
@@ -185,6 +190,8 @@ export default class App extends React.Component {
       determineTypeToBeAdopted: this.determineTypeToBeAdopted,
       yourNewAdoptedPet: this.state.yourNewAdoptedPet,
       handleYourNewAdoptedPet: this.handleYourNewAdoptedPet,
+      yourFinalPet: this.state.yourFinalPet,
+      handleYourFinalPet: this.handleYourFinalPet,
     }
 
     return (
