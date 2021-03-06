@@ -97,7 +97,7 @@ export default class choosePets extends React.Component {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'http://localhost:3000',
+        'Access-Control-Allow-Origin': 'https://petful-client-template-grundydarcey.vercel.app/',
       },
     })
     .then((res) => {
