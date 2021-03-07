@@ -38,6 +38,7 @@ export default class App extends React.Component {
       adoptionTimer: 0,
       seedTimer: 0,
       adoptionCounter: 0,
+
     }
   }
   
