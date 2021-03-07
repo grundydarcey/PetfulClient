@@ -17,7 +17,7 @@ export default class AdoptionProcess extends React.Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.newAdoption = this.newAdoption.bind(this);
-    this.seedArtificialUsers = this.seedArtificialUsers.bind(this);
+    //this.seedArtificialUsers = this.seedArtificialUsers.bind(this);
     this.randomDogHelper = this.randomDogHelper.bind(this);
     this.randomCatHelper = this.randomCatHelper.bind(this);
     this.stop = this.stop.bind(this);
