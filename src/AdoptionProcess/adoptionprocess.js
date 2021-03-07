@@ -228,6 +228,8 @@ export default class AdoptionProcess extends React.Component {
       })
       .then((data) => {
         this.context.gotAdopted(data);
+        console.log(data, 'data')
+        console.log(this.context.people, 'people')
       })
       .catch(error  => {
         console.error({ error })
