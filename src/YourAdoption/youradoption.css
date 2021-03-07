@@ -14,3 +14,10 @@ p {
 .yourPet {
   text-align: center;
 }
+
+@media all and (min-width: 100px) and (max-width: 800px) {
+  .yourPet {
+      width: 400px;
+      height: 250px;
+  }
+}
