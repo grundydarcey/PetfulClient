@@ -157,7 +157,7 @@ export default class AdoptionProcess extends React.Component {
         }
       
           
-          clearInterval(this.context.seedTimer);
+          clearInterval(this.seedTimeout);
           this.seedStop();
        //}, 5000)
       }, 5000);
