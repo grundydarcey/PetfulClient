@@ -160,6 +160,8 @@ export default class AdoptionProcess extends React.Component {
          }, 5000);
       }      
       
+      clearInterval(this.seedTimeout);
+      this.seedStop();
   }
 
   seedStop() {
