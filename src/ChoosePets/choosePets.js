@@ -110,11 +110,15 @@ export default class choosePets extends React.Component {
       if (this.context.selectedPetType === 'allCats') {
         this.context.handleFirstCat(data)
         this.context.handleYourNewAdoptedPet(data)
+        console.log(this.context.yourNewAdoptedPet, 'yournewadoptedcat')
+        console.log(this.context.cats, 'firstcat')
       } else {
         this.context.handleFirstDog(data)
-        this.context.handleYourNewAdoptedPet(data)       
+        this.context.handleYourNewAdoptedPet(data)   
+        console.log(this.context.yourNewAdoptedPet, 'yournewadopteddog')    
+        console.log(this.context.dogs, 'firstdog')
       }
-      this.context.handleYourNewAdoptedPet(data)
+      //his.context.handleYourNewAdoptedPet(data)
     })
     .catch((error) => {
       console.error({ error })
@@ -124,7 +128,8 @@ export default class choosePets extends React.Component {
     fetch(`${config.API_ENDPOINT}/${choice}`, {
       method: 'DELETE',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'https://petful-client-template-grundydarcey.vercel.app/',
       },
     })
     .then((res) => {
@@ -135,14 +140,10 @@ export default class choosePets extends React.Component {
     })
     .then((data) => {
       if (this.context.selectedPetType === 'allCats') {
-        this.context.handleFirstCat(data)
+        this.context.handleFirstCat(data);
         //this.context.handleYourNewAdoptedPet(data)
-        
-        
       } else {
-        this.context.handleFirstDog(data)
-      
-       
+        this.context.handleFirstDog(data);       
       }
       
       //console.log(this.context.yourNewAdoptedPet)
