@@ -21,6 +21,7 @@ export default class AdoptionProcess extends React.Component {
     this.randomCatHelper = this.randomCatHelper.bind(this);
     this.stop = this.stop.bind(this);
     this.seedStop = this.seedStop.bind(this);
+    this.seedArtUsers = this.seedArtUsers.bind(this);
    // this.runIfNewIsFirst = this.runIfNewIsFirst.bind(this);
    //this.myFunction = this.myFunction.bind(this);
   }
@@ -118,7 +119,44 @@ export default class AdoptionProcess extends React.Component {
     })
   }
 
-  seedArtificialUsers() {
+
+
+  seedArtUsers(limit) {
+    var i = 0;
+    const arr = ['ed', 'eddy', 'rolf', 'edd', 'naz'];
+    var ref = setInterval(() => {
+      fetch(`${config.API_ENDPOINT}/people`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          data: arr[i]
+        }),
+      })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Somethign went wrong');
+        }
+        return res.json();
+      })
+      .then((data) => {
+        this.context.addAdopt(data);
+      })
+      .catch(error => {
+        console.error({ error })
+      })
+      i++
+      if (i == limit) clearInterval(ref);
+    }, 1000);
+  }
+  
+  //seedArtUsers(5);
+
+
+
+
+  /*seedArtificialUsers() {
     const artificialUsers = ['Ed', 'Edd', 'Eddy', 'Naz', 'Rolf'];
     // this.seedTimeout = setInterval(() => {
     //   this.seedCounter += 1;
@@ -162,7 +200,7 @@ export default class AdoptionProcess extends React.Component {
       
       clearInterval(this.seedTimeout);
       this.seedStop();
-  }
+  }*/
 
   seedStop() {
     if (this.seedCounter > 0) {
@@ -205,6 +243,7 @@ export default class AdoptionProcess extends React.Component {
         //} 
     }, 5000)
     //console.log(this.context.people)
+    this.seedArtUsers(5);
     
   }
 
