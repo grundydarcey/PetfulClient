@@ -119,10 +119,13 @@ export default class AdoptionProcess extends React.Component {
 
   seedArtificialUsers() {
     const artificialUsers = ['Ed', 'Edd', 'Eddy', 'Naz', 'Rolf'];
-    this.seedTimeout = setInterval(() => {
-      this.seedCounter += 1;
-      this.seedStop();
+    // this.seedTimeout = setInterval(() => {
+    //   this.seedCounter += 1;
+    //   this.seedStop();
         for (let i = 0; i < artificialUsers.length; i++) {
+          this.seedTimeout = setInterval(() => {
+            this.seedCounter += 1;
+            this.seedStop();
           fetch(`${config.API_ENDPOINT}/people`, {
             method: 'POST',
             headers: {
@@ -149,8 +152,9 @@ export default class AdoptionProcess extends React.Component {
           .catch(error => {
             console.error({ error })
           })
-        }        
-      }, 5000);
+        }, 5000);
+      }      
+      
   }
 
   seedStop() {
