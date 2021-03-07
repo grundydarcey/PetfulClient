@@ -144,10 +144,12 @@ export default class AdoptionProcess extends React.Component {
               })
           .then((data) => {
                 this.context.addAdopt(data);
-                this.context.addAdopter();
-                this.context.addArtificials();
+                //this.context.addAdopter();
+                //this.context.addArtificials();
+                console.log(i)
                 //clearInterval(this.context.seedTimer);
                 //this.seedStop();
+                
                })
           .catch(error => {
                 console.error({ error })
