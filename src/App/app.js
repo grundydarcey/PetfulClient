@@ -3,7 +3,6 @@ import { Route } from 'react-router-dom';
 import Cats from '../Cats/cats';
 import Root from '../root/Root';
 import Dogs from '../Dogs/dogs';
-import Pets from '../Pets/pets';
 import AdoptionProcess from '../AdoptionProcess/adoptionprocess';
 import config from '../config';
 import ApiContext from '../ApiContext';
