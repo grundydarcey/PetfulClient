@@ -10,7 +10,6 @@ export default class YourAdoption extends React.Component {
   static contextType = ApiContext;
 
   showCorrectPet = () => {
-    this.interval = setInterval(() => {
     const yourChosenPet = this.context.selectedPetType;
     const choice = (yourChosenPet === 'allCats') ? (
       'cats'
@@ -34,25 +33,19 @@ export default class YourAdoption extends React.Component {
         this.context.handleFirstCat(data)
       } else {
         this.context.handleFirstDog(data)
-      }
-      //this.handleYourNewAdoptedPet(data);
-      clearInterval(this.interval);
-    
+      }  
     })
     .catch((error) => {
       console.error({ error })
     })
-  }, 1000);
   }
 
   render() {
     const displayPet = this.context.yourNewAdoptedPet;
-    console.log(displayPet)
     return (
       <div className='yourAdoption'>
           <Navigation />
           <h2>Meet your new Pet!</h2>
-          {console.log(displayPet)}
           <p>Thank you for adopting from our agency and giving this pet a new chance at life! We hope you two have a very happy life together!</p>
           <img src={displayPet['imageURL']} alt='yourPet' /><br />
           <p>Name: {displayPet['name']}<br />
