@@ -206,9 +206,9 @@ export default class AdoptionProcess extends React.Component {
     if (this.adoptionCounter === 3) {
       clearInterval(this.timeout);
     }
-    if (this.context.people.first === this.context.people.last) { 
+    //if (this.context.people.first === this.context.people.last) { 
       this.seedArtificialUsers();
-    }
+    //}
     
   }
 
