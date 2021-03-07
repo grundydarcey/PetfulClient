@@ -149,7 +149,7 @@ export default class AdoptionProcess extends React.Component {
           .catch(error => {
             console.error({ error })
           })
-          console.log(i)
+          //console.log(i)
           clearInterval(this.seedTimeout);
           this.seedStop();
         }, 5000);
@@ -232,7 +232,7 @@ export default class AdoptionProcess extends React.Component {
     })
     .then((name) => {
       this.context.addAdopt(name)
-      console.log(this.context.people)
+//      console.log(this.context.people)
       this.context.addAdopter();
       this.context.manuallyAddUser(name.last);
       
@@ -253,7 +253,7 @@ export default class AdoptionProcess extends React.Component {
   
 
   render() {
-    console.log(this.context.addedUser)
+    //console.log(this.context.addedUser)
    
     const submission = (this.state.submitted === false) ? (
       <form onSubmit={(e) => this.handleSubmit(e)}>
@@ -270,6 +270,8 @@ export default class AdoptionProcess extends React.Component {
     )
 
     const myFunction = () => {
+      console.log(this.context.people.first, 'first')
+      console.log(this.context.people.last, 'last')
       if (this.context.people.first === this.context.people.last) {
         this.seedArtificialUsers();
       }
