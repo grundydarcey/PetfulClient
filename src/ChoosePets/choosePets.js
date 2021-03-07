@@ -105,9 +105,9 @@ export default class choosePets extends React.Component {
       if (this.context.selectedPetType === 'allCats') {
         this.context.handleFirstCat(data);
         this.context.handleYourNewAdoptedPet(data);
-      } else {
+      } else if (this.context.selectedPetType === 'allDogs') {
         this.context.handleFirstDog(data);
-        this.context.handleYourNewAdoptedPet(data);  
+        this.context.handleYourNewAdoptedPet(data);
       }
     })
     .catch((error) => {
