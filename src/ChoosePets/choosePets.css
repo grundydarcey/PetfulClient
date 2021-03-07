@@ -6,3 +6,7 @@
 .cats, .dogs {
   flex-direction: row;
 }
+
+.choosePets form {
+  text-align: center;
+}

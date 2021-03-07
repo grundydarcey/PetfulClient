@@ -6,3 +6,7 @@
 .cats, .dogs {
     flex-direction: row;
 }
+
+p {
+  text-align: center;
+}

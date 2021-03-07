@@ -1,5 +1,6 @@
 import React from 'react';
 import ApiContext from '../ApiContext';
+import './adoptionqueue.js';
 
 export default class AdoptionQueue extends React.Component {
   constructor(props) {
