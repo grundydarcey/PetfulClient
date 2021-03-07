@@ -5,22 +5,12 @@ import './adoptionqueue.js';
 export default class AdoptionQueue extends React.Component {
   constructor(props) {
     super(props)
-    //this.determineChosenPet = this.determineChosenPet.bind(this);
     this.generateAllPeople = this.generateAllPeople.bind(this);
     this.generatePeopleWithPet = this.generatePeopleWithPet.bind(this);
     this.generateLastPerson = this.generateLastPerson.bind(this);
   }
   
   static contextType = ApiContext;
-
-  /*determineChosenPet() {
-    let chosenPet = (this.context.typeAboutToBeAdopted === 'allCats') ? (
-      this.context.allCats
-    ) : (
-      this.context.allDogs
-    )
-    return chosenPet.first['value']['name']
-  }*/
 
   generateAllPeople() {
     let current = (this.context.people).first;

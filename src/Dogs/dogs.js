@@ -1,6 +1,5 @@
 import React from 'react';
 import ApiContext from '../ApiContext';
-//import Navigation from '../Navigation/navigation';
 import './dogs.css';
 
 export default class Dogs extends React.Component {   

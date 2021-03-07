@@ -31,14 +31,9 @@ export default class App extends React.Component {
       yourSelectedPet: [],
       petType: [],
       currentAdoption: [],
-      //adoptionBegan: false,
       typeAboutToBeAdopted: [],
       yourNewAdoptedPet: [],
       yourFinalPet: [],
-      adoptionTimer: 0,
-      seedTimer: 0,
-      adoptionCounter: 0,
-
     }
   }
   
@@ -189,7 +184,6 @@ export default class App extends React.Component {
       handleAllDogs: this.handleAllDogs,
       handleFirstCat: this.handleFirstCat,
       handleFirstDog: this.handleFirstDog,
-      //adoptionBegan: this.state.adoptionBegan,
       handleBeginAdoption: this.handleBeginAdoption,
       typeAboutToBeAdopted: this.state.typeAboutToBeAdopted,
       determineTypeToBeAdopted: this.determineTypeToBeAdopted,
@@ -197,9 +191,6 @@ export default class App extends React.Component {
       handleYourNewAdoptedPet: this.handleYourNewAdoptedPet,
       yourFinalPet: this.state.yourFinalPet,
       handleYourFinalPet: this.handleYourFinalPet,
-      adoptionTimer: this.state.adoptionTimer,
-      seedTimer: this.state.seedTimer,
-      adoptionCounter: this.state.adoptionCounter,
     }
 
     return (

@@ -41,7 +41,6 @@ export default class choosePets extends React.Component {
     .catch((error) => {
       console.error({ error })
     })
-    //console.log(this.context.yourSelectedPet)
     fetch(`${config.API_ENDPOINT}/people`, {
       method: 'DELETE',
       headers: {
@@ -75,15 +74,11 @@ export default class choosePets extends React.Component {
     })
     .then((data) => {
       this.context.petGotAdopted(selection);
-      //console.log('checking if current is deleted')
     })
     .catch((error) => {
       console.error({ error })
-      //console.log('checking once more if current is deleted')
     })
   }
-
-
 
   handleView() {
     const yourChosenPet = this.context.selectedPetType;
@@ -108,23 +103,17 @@ export default class choosePets extends React.Component {
     })
     .then((data) => {
       if (this.context.selectedPetType === 'allCats') {
-        this.context.handleFirstCat(data)
-        this.context.handleYourNewAdoptedPet(data)
-        console.log(this.context.yourNewAdoptedPet, 'yournewadoptedcat')
-        console.log(this.context.cats, 'firstcat')
+        this.context.handleFirstCat(data);
+        this.context.handleYourNewAdoptedPet(data);
       } else {
-        this.context.handleFirstDog(data)
-        this.context.handleYourNewAdoptedPet(data)   
-        console.log(this.context.yourNewAdoptedPet, 'yournewadopteddog')    
-        console.log(this.context.dogs, 'firstdog')
+        this.context.handleFirstDog(data);
+        this.context.handleYourNewAdoptedPet(data);  
       }
-      //his.context.handleYourNewAdoptedPet(data)
     })
     .catch((error) => {
       console.error({ error })
     })
-    
-
+  
     fetch(`${config.API_ENDPOINT}/${choice}`, {
       method: 'DELETE',
       headers: {
@@ -141,12 +130,9 @@ export default class choosePets extends React.Component {
     .then((data) => {
       if (this.context.selectedPetType === 'allCats') {
         this.context.handleFirstCat(data);
-        //this.context.handleYourNewAdoptedPet(data)
       } else {
         this.context.handleFirstDog(data);       
       }
-      
-      //console.log(this.context.yourNewAdoptedPet)
     })
     .catch((error) => {
       console.error({ error })
@@ -154,7 +140,6 @@ export default class choosePets extends React.Component {
   }
 
   render() {
-    //console.log(this.context.yourNewAdoptedPet)
     const viewAdoption = (this.context.yourAdoption === true) ? (
       <Link to='/youradoption' onClick={() => this.handleView()}>Meet Your Pet</Link>
     ) : (

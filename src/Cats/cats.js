@@ -1,5 +1,4 @@
 import React from 'react';
-//import Navigation from '../Navigation/navigation';
 import ApiContext from '../ApiContext';
 import './cats.css';
 

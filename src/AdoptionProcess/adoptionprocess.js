@@ -17,14 +17,10 @@ export default class AdoptionProcess extends React.Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.newAdoption = this.newAdoption.bind(this);
-    //this.seedArtificialUsers = this.seedArtificialUsers.bind(this);
     this.randomDogHelper = this.randomDogHelper.bind(this);
     this.randomCatHelper = this.randomCatHelper.bind(this);
     this.stop = this.stop.bind(this);
-    this.seedStop = this.seedStop.bind(this);
     this.seedArtUsers = this.seedArtUsers.bind(this);
-   // this.runIfNewIsFirst = this.runIfNewIsFirst.bind(this);
-   //this.myFunction = this.myFunction.bind(this);
   }
 
   timeout = 0;
@@ -120,8 +116,6 @@ export default class AdoptionProcess extends React.Component {
     })
   }
 
-
-
   seedArtUsers(limit) {
     var i = 0;
     const arr = ['Ed', 'Edd', 'Eddy', 'Rolf', 'Naz'];
@@ -151,69 +145,11 @@ export default class AdoptionProcess extends React.Component {
       if (i === limit) clearInterval(ref);
     }, 5000);
   }
-  
-  //seedArtUsers(5);
-
-
-
-
-  /*seedArtificialUsers() {
-    const artificialUsers = ['Ed', 'Edd', 'Eddy', 'Naz', 'Rolf'];
-    // this.seedTimeout = setInterval(() => {
-    //   this.seedCounter += 1;
-    //   this.seedStop();
-        for (let i = 0; i < artificialUsers.length; i++) {
-          this.seedTimeout = setInterval(() => {
-            this.seedCounter += 1;
-            this.seedStop();
-          fetch(`${config.API_ENDPOINT}/people`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              data: artificialUsers[i]
-            }),
-          })
-          .then(res => {
-                if (!res.ok) {
-                  throw new Error('Something went wrong, try again');
-                }
-                return res.json();
-              })
-          .then((data) => {
-            this.context.addAdopt(data) 
-            //this.context.addAdopter();
-            //this.context.addArtificials();
-          //   clearInterval(this.seedTimeout);
-          //   this.seedStop();
-          // }, 5000);
-         })
-          .catch(error => {
-            console.error({ error })
-          })
-
-          //console.log(i)
-           clearInterval(this.seedTimeout);
-           this.seedStop();
-         }, 5000);
-      }      
-      
-      clearInterval(this.seedTimeout);
-      this.seedStop();
-  }*/
-
-  seedStop() {
-    if (this.seedCounter > 0) {
-      clearInterval(this.seedTimeout);
-    }
-  }
 
   newAdoption() {
     this.timeout = setInterval(() => {
       this.adoptionCounter += 1;
       this.stop();
-      //this.seedArtificialUsers();
       fetch(`${config.API_ENDPOINT}/people`, {
         method: 'DELETE',
         headers: {
@@ -228,8 +164,6 @@ export default class AdoptionProcess extends React.Component {
       })
       .then((data) => {
         this.context.gotAdopted(data);
-        console.log(data, 'data')
-        console.log(this.context.people, 'people')
       })
       .catch(error  => {
         console.error({ error })
@@ -239,34 +173,15 @@ export default class AdoptionProcess extends React.Component {
       } else {
         this.randomDogHelper();
       }
-      
-        //this.seedArtificialUsers();
-        //if (this.context.people.first === this.context.people.last) {
-          //this.seedArtificialUsers();
-        //} 
     }, 5000)
-    //console.log(this.context.people)
-    console.log(this.context.people, '.people')
-    console.log(this.context.people.first, '.first')
-    console.log(this.context.people.last, '.last')
-    console.log(this.context.people['first'], '[first')
-    console.log(this.context.people['last'], '[last')
-   // if (this.context.people.first['value'] === this.context.people.last['value']) {
-      this.seedArtUsers(5);
-    //}
-    //return;
+    this.seedArtUsers(5);
   }
 
   stop() {
     if (this.adoptionCounter === 3) {
       clearInterval(this.timeout);
-    }
-    //if (this.context.people.first === this.context.people.last) { 
-      //this.seedArtificialUsers();
-    //}
-    
+    }  
   }
-
 
   handleSubmit(e) {
     e.preventDefault();
@@ -287,11 +202,9 @@ export default class AdoptionProcess extends React.Component {
       return res.json();
     })
     .then((data) => {
-      console.log(data)
-      this.context.addAdopt(data);//compare these two for condition
-      console.log(this.context.people, 'this.context.people')
+      this.context.addAdopt(data);
       this.context.addAdopter();
-      this.context.manuallyAddUser(name);//compare these 2 for conditional
+      this.context.manuallyAddUser(name);
     })
     .catch(error => {
       console.error({ error })
@@ -303,16 +216,9 @@ export default class AdoptionProcess extends React.Component {
     const randomPetType = petChoices[Math.floor(Math.random() * petChoices.length)];
     this.context.determineTypeToBeAdopted(randomPetType);
     this.newAdoption();
-    
   }
-
   
-  
-  
-
   render() {
-    //console.log(this.context.addedUser)
-   
     const submission = (this.state.submitted === false) ? (
       <form onSubmit={(e) => this.handleSubmit(e)}>
           <fieldset>
@@ -348,11 +254,9 @@ export default class AdoptionProcess extends React.Component {
           <PetDisplay />
         </div>
       </div>
-
     )
     return (
       <div className='adoptionPage'>
-        
         {determineYourTurn}
       </div>
     )
