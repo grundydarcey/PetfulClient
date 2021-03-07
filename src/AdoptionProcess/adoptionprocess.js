@@ -278,7 +278,7 @@ export default class AdoptionProcess extends React.Component {
         data: name
       }),
     })
-    .then(res => {
+    .then((res) => {
       if (!res.ok) {
         throw new Error('Something went wrong, try again');
       }
@@ -293,6 +293,7 @@ export default class AdoptionProcess extends React.Component {
     .catch(error => {
       console.error({ error })
     })
+    
     this.props.history.push('/adoptionprocess');
     this.setState({ submitted: true })
     let petChoices = ['allCats', 'allDogs'];
