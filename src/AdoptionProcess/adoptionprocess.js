@@ -124,7 +124,7 @@ export default class AdoptionProcess extends React.Component {
 
   seedArtUsers(limit) {
     var i = 0;
-    const arr = ['ed', 'eddy', 'rolf', 'edd', 'naz'];
+    const arr = ['Ed', 'Edd', 'Eddy', 'Rolf', 'Naz'];
     var ref = setInterval(() => {
       fetch(`${config.API_ENDPOINT}/people`, {
         method: 'POST',
@@ -327,7 +327,7 @@ export default class AdoptionProcess extends React.Component {
       <p>Thanks for submitting your name! You will be added to our list.</p>
     )
     
-    const determineYourTurn = (this.context.people.first['value'] === this.context.people.last['value']) ? (
+    const determineYourTurn = (this.context.people.first['value'] === this.context.addedUser['value']) ? (
       <div className='adoption'>
         <Navigation />
         <h2>Choose Your Pet</h2>
