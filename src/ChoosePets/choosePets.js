@@ -169,13 +169,13 @@ export default class choosePets extends React.Component {
         <form onSubmit={(e) => this.handleSubmit(e)}>
           <fieldset>
             <legend>Make your selections</legend>
-            <label htmlFor='petChoice' id='petChoice'>I would like to adopt one of the.... </label>
+            <label htmlFor='petChoice' id='petChoice' className='petchoice'>I would like to adopt one of the.... </label>
             <select onChange={(e) => this.handleChange(e)}>
               <option value='select'>Select One</option>
               <option value='allCats'>Cats</option>
               <option value='allDogs'>Dogs</option>
             </select><br /><br />
-            <button type='submit'>Adopt Your Pet</button>
+            <button type='submit' className='adopt'>Adopt Your Pet</button>
             {viewAdoption}
           </fieldset>
         </form>
