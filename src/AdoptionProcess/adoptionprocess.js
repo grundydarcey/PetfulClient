@@ -199,7 +199,7 @@ export default class AdoptionProcess extends React.Component {
     }, 5000)
     //console.log(this.context.people)
     
-      this.seedArtificialUsers();
+      //this.seedArtificialUsers();
     
   }
 
@@ -268,9 +268,19 @@ export default class AdoptionProcess extends React.Component {
     ) : (
       <p>Thanks for submitting your name! You will be added to our list.</p>
     )
+
+    const myFunction = () => {
+      if (this.context.people.first === this.context.people.last) {
+        this.seedArtificialUsers();
+      }
+      else {
+        return
+      }
+    }
     
     const determineYourTurn = (this.context.people.first['value'] === this.context.addedUser['value']) ? (
       <div className='adoption'>
+        {myFunction}
         <Navigation />
         <h2>Choose Your Pet</h2>
         <p>Click below to choose your pet!</p>
