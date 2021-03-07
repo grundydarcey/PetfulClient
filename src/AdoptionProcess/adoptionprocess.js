@@ -285,9 +285,9 @@ export default class AdoptionProcess extends React.Component {
       }
       return res.json();
     })
-    .then((name) => {
-      this.context.addAdopt(name);
-      this.context.gotAdopted(name);
+    .then((data) => {
+      this.context.addAdopt(data);
+     // this.context.gotAdopted(name);
 //      console.log(this.context.people)
       this.context.addAdopter();
       this.context.manuallyAddUser(name.last);
