@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import Navigation from '../Navigation/navigation';
 import React from 'react';
 import ApiContext from '../ApiContext';
@@ -147,7 +148,7 @@ export default class AdoptionProcess extends React.Component {
         console.error({ error })
       })
       i++
-      if (i == limit) clearInterval(ref);
+      if (i === limit) clearInterval(ref);
     }, 1000);
   }
   
