@@ -201,9 +201,9 @@ export default class AdoptionProcess extends React.Component {
     //console.log(this.context.people)
     if (this.context.people.first === this.context.people.last) { 
       this.seedArtificialUsers();
-    } 
+    } else {
     return;
-    
+    }
   }
 
   stop() {
