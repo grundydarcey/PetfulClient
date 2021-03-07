@@ -244,8 +244,14 @@ export default class AdoptionProcess extends React.Component {
         //} 
     }, 5000)
     //console.log(this.context.people)
+    console.log(this.context.people, '.people')
+    console.log(this.context.people.first, '.first')
+    console.log(this.context.people.last, '.last')
+    console.log(this.context.people['first'], '[first')
+    console.log(this.context.people['last'], '[last')
     if (this.context.people.first === this.context.people.last) {
-    this.seedArtUsers(5);
+      
+      this.seedArtUsers(5);
     }
     
   }
