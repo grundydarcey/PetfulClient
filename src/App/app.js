@@ -198,7 +198,6 @@ export default class App extends React.Component {
           <Route exact path='/' component={Root} />
           <Route exact path='/cats' component={Cats} />
           <Route exact path='/dogs' component={Dogs} />
-          <Route exact path='/pets' component={Pets} />
           <Route exact path='/adoptionprocess' component={AdoptionProcess} />
           <Route exact path='/choosepets' component={ChoosePets} />
           <Route exact path='/youradoption' component={YourAdoption} />
