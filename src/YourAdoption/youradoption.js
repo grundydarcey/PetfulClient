@@ -47,7 +47,7 @@ export default class YourAdoption extends React.Component {
           <Navigation />
           <h2>Meet your new Pet!</h2>
           <p>Thank you for adopting from our agency and giving this pet a new chance at life! We hope you two have a very happy life together!</p>
-          <img src={displayPet['imageURL']} alt='yourPet' /><br />
+          <img src={displayPet['imageURL']} alt='yourPet' className='yourPet' /><br />
           <p>Name: {displayPet['name']}<br />
             Gender: {displayPet['gender']}<br />
             Age: {displayPet['age']}<br />

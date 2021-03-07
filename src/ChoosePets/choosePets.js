@@ -156,7 +156,7 @@ export default class choosePets extends React.Component {
   render() {
     //console.log(this.context.yourNewAdoptedPet)
     const viewAdoption = (this.context.yourAdoption === true) ? (
-      <Link to='/youradoption' onClick={() => this.handleView()}>View Your Pet</Link>
+      <Link to='/youradoption' onClick={() => this.handleView()}>Meet Your Pet</Link>
     ) : (
       <p>Please select what animal you'd like.</p>
     )
@@ -175,7 +175,7 @@ export default class choosePets extends React.Component {
               <option value='allCats'>Cats</option>
               <option value='allDogs'>Dogs</option>
             </select><br /><br />
-            <button type='submit' className='adopt'>Adopt Your Pet</button>
+            <button type='submit' className='adopt'>Adopt Your Pet</button><br />
             {viewAdoption}
           </fieldset>
         </form>
