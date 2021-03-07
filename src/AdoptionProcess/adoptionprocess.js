@@ -22,7 +22,7 @@ export default class AdoptionProcess extends React.Component {
     this.stop = this.stop.bind(this);
     this.seedStop = this.seedStop.bind(this);
    // this.runIfNewIsFirst = this.runIfNewIsFirst.bind(this);
-   this.myFunction = this.myFunction.bind(this);
+   //this.myFunction = this.myFunction.bind(this);
   }
 
   timeout = 0;
