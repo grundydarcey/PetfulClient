@@ -282,7 +282,6 @@ export default class AdoptionProcess extends React.Component {
     
     const determineYourTurn = (this.context.people.first['value'] === this.context.addedUser['value']) ? (
       <div className='adoption'>
-        {myFunction}
         <Navigation />
         <h2>Choose Your Pet</h2>
         <p>Click below to choose your pet!</p>
@@ -306,6 +305,7 @@ export default class AdoptionProcess extends React.Component {
     )
     return (
       <div className='adoptionPage'>
+        {myFunction()}
         {determineYourTurn}
       </div>
     )
