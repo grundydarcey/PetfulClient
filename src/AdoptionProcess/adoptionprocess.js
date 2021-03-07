@@ -287,6 +287,7 @@ export default class AdoptionProcess extends React.Component {
     .then((data) => {
       console.log(data)
       this.context.addAdopt(data);//compare these two for condition
+      console.log(this.context.people, 'this.context.people')
       this.context.addAdopter();
       this.context.manuallyAddUser(name);//compare these 2 for conditional
     })
