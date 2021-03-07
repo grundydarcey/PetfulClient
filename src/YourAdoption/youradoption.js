@@ -41,7 +41,7 @@ export default class YourAdoption extends React.Component {
   }*/
 
   render() {
-    const displayPet = this.context.yourNewAdoptedPet;
+    const displayPet = this.context.yourSelectedPet;
     return (
       <div className='yourAdoption'>
           <Navigation />
