@@ -119,6 +119,7 @@ export default class AdoptionProcess extends React.Component {
 
   seedArtificialUsers() {
     const artificialUsers = ['Ed', 'Edd', 'Eddy', 'Naz', 'Rolf'];
+    console.log(artificialUsers.length);
       
     this.seedTimeout = setInterval(() => {
       this.seedCounter += 1;
