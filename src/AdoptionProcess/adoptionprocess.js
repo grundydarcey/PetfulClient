@@ -147,8 +147,8 @@ export default class AdoptionProcess extends React.Component {
                 //this.context.addAdopter();
                 //this.context.addArtificials();
                 console.log(i)
-                //clearInterval(this.context.seedTimer);
-                //this.seedStop();
+                clearInterval(this.seedTimeout);
+                this.seedStop();
                 
                })
           .catch(error => {
@@ -157,8 +157,8 @@ export default class AdoptionProcess extends React.Component {
         }
       
           
-          clearInterval(this.seedTimeout);
-          this.seedStop();
+          //clearInterval(this.seedTimeout);
+          //this.seedStop();
        //}, 5000)
       }, 5000);
       }
