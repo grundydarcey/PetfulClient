@@ -36,7 +36,7 @@ export default class AdoptionQueue extends React.Component {
     const allThesePeople = this.context.people;
     let current = allThesePeople.first;
     let arr = [];
-    if (allThesePeople.first['value'] !== this.context.addedUser['value']) {
+    if (allThesePeople.first['value'] !== this.context.addedUser) {
       if (this.context.typeAboutToBeAdopted === 'allCats') {
         const chosenPet = this.context.allCats;
         let currentlyAdopted = allThesePeople.first['value'] + ` is adopting ` + chosenPet.first['value']['name'];
