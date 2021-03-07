@@ -123,15 +123,16 @@ export default class AdoptionProcess extends React.Component {
     this.seedTimeout = setInterval(() => {
       this.seedCounter += 1;
       this.seedStop();
-      artificialUsers.forEach((user) => {
-      
+      //artificialUsers.forEach((user) => {
+
+        for (let i = 0; i < artificialUsers.length; i++) {
           fetch(`${config.API_ENDPOINT}/people`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              data: user
+              data: artificialUsers[i]
             }),
           })
           .then(res => {
@@ -150,11 +151,14 @@ export default class AdoptionProcess extends React.Component {
           .catch(error => {
                 console.error({ error })
           })
+        }
+      
+          
           clearInterval(this.context.seedTimer);
           this.seedStop();
-        }, 5000)
+       //}, 5000)
+      }, 5000);
       }
-      )}
 
   seedStop() {
     if (this.seedCounter === 1) {
