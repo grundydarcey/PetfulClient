@@ -233,7 +233,7 @@ export default class AdoptionProcess extends React.Component {
       <p>Thanks for submitting your name! You will be added to our list.</p>
     )
     
-    const determineYourTurn = (this.context.people.first['value'] === this.context.addedUser) ? (
+    const determineYourTurn = (this.context.people.first['value'] === this.context.addedUser && this.context.addedUser !== []) ? (
       <div className='adoption'>
         <Navigation />
         <h2>Choose Your Pet</h2>
