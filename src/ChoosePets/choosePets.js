@@ -41,7 +41,7 @@ export default class choosePets extends React.Component {
     .catch((error) => {
       console.error({ error })
     })
-    console.log(this.context.yourSelectedPet)
+    //console.log(this.context.yourSelectedPet)
     fetch(`${config.API_ENDPOINT}/people`, {
       method: 'DELETE',
       headers: {
@@ -75,11 +75,11 @@ export default class choosePets extends React.Component {
     })
     .then((data) => {
       this.context.petGotAdopted(selection);
-      console.log('checking if current is deleted')
+      //console.log('checking if current is deleted')
     })
     .catch((error) => {
       console.error({ error })
-      console.log('checking once more if current is deleted')
+      //console.log('checking once more if current is deleted')
     })
   }
 
@@ -145,7 +145,7 @@ export default class choosePets extends React.Component {
        
       }
       
-      console.log(this.context.yourNewAdoptedPet)
+      //console.log(this.context.yourNewAdoptedPet)
     })
     .catch((error) => {
       console.error({ error })
@@ -153,7 +153,7 @@ export default class choosePets extends React.Component {
   }
 
   render() {
-    console.log(this.context.yourNewAdoptedPet)
+    //console.log(this.context.yourNewAdoptedPet)
     const viewAdoption = (this.context.yourAdoption === true) ? (
       <Link to='/youradoption' onClick={() => this.handleView()}>View Your Pet</Link>
     ) : (

@@ -201,7 +201,7 @@ export default class AdoptionProcess extends React.Component {
           this.seedArtificialUsers();
         //} 
     }, 5000)
-    console.log(this.context.people)
+    //console.log(this.context.people)
     
       //this.seedArtificialUsers();
     
@@ -239,9 +239,7 @@ export default class AdoptionProcess extends React.Component {
       console.log(this.context.people)
       this.context.addAdopter();
       this.context.manuallyAddUser(name.last);
-      console.log(name.last)
-      console.log(this.context.addedUser);
-      console.log(typeof (this.context.addedUser))
+      
     })
     .catch(error => {
       console.error({ error })
@@ -252,17 +250,7 @@ export default class AdoptionProcess extends React.Component {
     const randomPetType = petChoices[Math.floor(Math.random() * petChoices.length)];
     this.context.determineTypeToBeAdopted(randomPetType);
     this.newAdoption();
-    console.log(this.context.people['first'])
-    console.log(this.context.people['last'])
-    console.log(this.context.people.first)
-    console.log(this.context.people.last)
-    console.log(this.context.people.first['value'])
-    console.log(this.context.people.last['value'])
-    // if (this.context.people.first['value'] === this.context.people.last['value']) {
-    //   this.seedArtificialUsers();
-    // } else {
-    //   return;
-    // }
+    
   }
 
   
