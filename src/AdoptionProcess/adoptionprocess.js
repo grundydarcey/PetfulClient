@@ -149,7 +149,7 @@ export default class AdoptionProcess extends React.Component {
       })
       i++
       if (i === limit) clearInterval(ref);
-    }, 1000);
+    }, 5000);
   }
   
   //seedArtUsers(5);
@@ -244,7 +244,9 @@ export default class AdoptionProcess extends React.Component {
         //} 
     }, 5000)
     //console.log(this.context.people)
+    if (this.context.people.first === this.context.people.last) {
     this.seedArtUsers(5);
+    }
     
   }
 
