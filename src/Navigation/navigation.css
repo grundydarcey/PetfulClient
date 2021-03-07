@@ -10,7 +10,8 @@ a {
   margin-top: 0;
   margin-bottom: 0;
   color: #424C4D;
-  font-weight: 20px;
+  font-size: 25px;
+  font: bold;
 }
 
 .nav {
