@@ -73,7 +73,6 @@ export default class choosePets extends React.Component {
       return res.json();
     })
     .then((data) => {
-     // this.context.petGotAdopted(selection);
      if (selection === 'allCats') {
        this.context.handleAllCats(data)
      } else if (selection === 'allDogs') {
@@ -165,7 +164,7 @@ export default class choosePets extends React.Component {
               <option value='allCats'>Cats</option>
               <option value='allDogs'>Dogs</option>
             </select><br /><br />
-            <button type='submit' className='adopt'>Adopt Your Pet</button><br />
+            <button type='submit' className='adopt'>Adopt Your Pet</button><br /><br />
             {viewAdoption}
           </fieldset>
         </form>

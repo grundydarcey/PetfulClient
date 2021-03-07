@@ -4,41 +4,9 @@ import ApiContext from '../ApiContext';
 import AdoptionQueue from '../AdoptionQueue/adoptionqueue';
 import PetDisplay from '../PetDisplay/petdisplay';
 import './youradoption.css';
-//import config from '../config';
 
 export default class YourAdoption extends React.Component {
   static contextType = ApiContext;
-
-  /*showCorrectPet = () => {
-    const yourChosenPet = this.context.selectedPetType;
-    const choice = (yourChosenPet === 'allCats') ? (
-      'cats'
-    ) : (
-      'dogs'
-    )
-    fetch(`${config.API_ENDPOINT}/${choice}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    })
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error('Something went wrong, please try again');
-      }
-      return res.json();
-    })
-    .then((data) => {
-      if (this.context.selectedPetType === 'allCats') {
-        this.context.handleFirstCat(data)
-      } else {
-        this.context.handleFirstDog(data)
-      }  
-    })
-    .catch((error) => {
-      console.error({ error })
-    })
-  }*/
 
   render() {
     const displayPet = this.context.yourSelectedPet;
