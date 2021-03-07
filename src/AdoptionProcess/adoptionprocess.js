@@ -22,6 +22,7 @@ export default class AdoptionProcess extends React.Component {
     this.stop = this.stop.bind(this);
     this.seedStop = this.seedStop.bind(this);
    // this.runIfNewIsFirst = this.runIfNewIsFirst.bind(this);
+   this.myFunction = this.myFunction.bind(this);
   }
 
   timeout = 0;
@@ -249,6 +250,16 @@ export default class AdoptionProcess extends React.Component {
     
   }
 
+  myFunction() {
+    console.log(this.context.people.first, 'first')
+    console.log(this.context.people.last, 'last')
+    if (this.context.people.first === this.context.people.last) {
+      this.seedArtificialUsers();
+    }
+    else {
+      return
+    }
+  }
   
   
 
@@ -269,16 +280,7 @@ export default class AdoptionProcess extends React.Component {
       <p>Thanks for submitting your name! You will be added to our list.</p>
     )
 
-    const myFunction = () => {
-      console.log(this.context.people.first, 'first')
-      console.log(this.context.people.last, 'last')
-      if (this.context.people.first === this.context.people.last) {
-        this.seedArtificialUsers();
-      }
-      else {
-        return
-      }
-    }
+    
     
     const determineYourTurn = (this.context.people.first['value'] === this.context.addedUser['value']) ? (
       <div className='adoption'>
@@ -305,7 +307,7 @@ export default class AdoptionProcess extends React.Component {
     )
     return (
       <div className='adoptionPage'>
-        {myFunction()}
+        {this.myFunction()}
         {determineYourTurn}
       </div>
     )
