@@ -73,7 +73,12 @@ export default class choosePets extends React.Component {
       return res.json();
     })
     .then((data) => {
-      this.context.petGotAdopted(selection);
+     // this.context.petGotAdopted(selection);
+     if (selection === 'allCats') {
+       this.context.handleAllCats(data)
+     } else if (selection === 'allDogs') {
+       this.context.handleAllDogs(data)
+     }
     })
     .catch((error) => {
       console.error({ error })

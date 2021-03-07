@@ -4,12 +4,12 @@ import ApiContext from '../ApiContext';
 import AdoptionQueue from '../AdoptionQueue/adoptionqueue';
 import PetDisplay from '../PetDisplay/petdisplay';
 import './youradoption.css';
-import config from '../config';
+//import config from '../config';
 
 export default class YourAdoption extends React.Component {
   static contextType = ApiContext;
 
-  showCorrectPet = () => {
+  /*showCorrectPet = () => {
     const yourChosenPet = this.context.selectedPetType;
     const choice = (yourChosenPet === 'allCats') ? (
       'cats'
@@ -38,7 +38,7 @@ export default class YourAdoption extends React.Component {
     .catch((error) => {
       console.error({ error })
     })
-  }
+  }*/
 
   render() {
     const displayPet = this.context.yourNewAdoptedPet;
