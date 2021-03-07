@@ -199,18 +199,16 @@ export default class AdoptionProcess extends React.Component {
         //} 
     }, 5000)
     //console.log(this.context.people)
-    if (this.context.people.first === this.context.people.last) { 
-      this.seedArtificialUsers();
-    } else {
-    return;
-    }
+    
   }
 
   stop() {
     if (this.adoptionCounter === 3) {
       clearInterval(this.timeout);
     }
-    //this.seedArtificialUsers();
+    if (this.context.people.first === this.context.people.last) { 
+      this.seedArtificialUsers();
+    }
     
   }
 
