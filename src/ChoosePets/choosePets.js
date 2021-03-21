@@ -26,7 +26,8 @@ export default class choosePets extends React.Component {
     fetch(`${config.API_ENDPOINT}/${individualSelection}`, {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        //'Access-Control-Allow-Origin': '*',
       },
     })
     .then((res) => {
@@ -44,7 +45,8 @@ export default class choosePets extends React.Component {
     fetch(`${config.API_ENDPOINT}/people`, {
       method: 'DELETE',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+       // 'Access-Control-Allow-Origin': '*',
       },
     })
     .then((res) => {
@@ -63,7 +65,8 @@ export default class choosePets extends React.Component {
     fetch(`${config.API_ENDPOINT}/${selection}`, {
       method: 'DELETE',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+       // 'Access-Control-Allow-Origin': '*',
       }
     })
     .then((res) => {
@@ -96,7 +99,7 @@ export default class choosePets extends React.Component {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://petful-client-template-grundydarcey.vercel.app/',
+        //'Access-Control-Allow-Origin': '*',
       },
     })
     .then((res) => {
@@ -122,7 +125,7 @@ export default class choosePets extends React.Component {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://petful-client-template-grundydarcey.vercel.app/',
+       //'Access-Control-Allow-Origin': '*',
       },
     })
     .then((res) => {

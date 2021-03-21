@@ -47,8 +47,8 @@ export default class App extends React.Component {
       fetch(`${config.API_ENDPOINT}/people`), {
         method: 'GET',
         header: {
-          //'Access-Control-Allow-Origin': 'https://petful-client-template-grundydarcey.vercel.app/',
-          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Origin': 'https://petful-client-template-grundydarcey.vercel.app/',
+          //'Access-Control-Allow-Origin': '*',
         }
       }
     ])

@@ -41,7 +41,8 @@ export default class AdoptionProcess extends React.Component {
     fetch(`${config.API_ENDPOINT}/allDogs`, {
       method: 'DELETE',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+       // 'Access-Control-Allow-Origin': '*',
       },
     })
     .then((res) => {
@@ -59,7 +60,8 @@ export default class AdoptionProcess extends React.Component {
     fetch(`${config.API_ENDPOINT}/dogs`, {
       method: 'DELETE',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        //'Access-Control-Allow-Origin': '*',
       },
     })
     .then((res) => {
@@ -80,7 +82,8 @@ export default class AdoptionProcess extends React.Component {
     fetch(`${config.API_ENDPOINT}/allCats`, {
       method: 'DELETE',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        //'Access-Control-Allow-Origin': '*',
       },
     })
     .then((res) => {
@@ -99,7 +102,8 @@ export default class AdoptionProcess extends React.Component {
     fetch(`${config.API_ENDPOINT}/cats`, {
       method: 'DELETE',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        //'Access-Control-Allow-Origin': '*',
       },
     })
     .then((res) => {
@@ -124,6 +128,7 @@ export default class AdoptionProcess extends React.Component {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+         // 'Access-Control-Allow-Origin': '*',
         },
         body: JSON.stringify({
           data: arr[i]
@@ -153,7 +158,8 @@ export default class AdoptionProcess extends React.Component {
       fetch(`${config.API_ENDPOINT}/people`, {
         method: 'DELETE',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          //'Access-Control-Allow-Origin': '*',
         },
       })
       .then((res) => {
@@ -190,6 +196,7 @@ export default class AdoptionProcess extends React.Component {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        //'Access-Control-Allow-Origin': '*',
       },
       body: JSON.stringify({
         data: name
